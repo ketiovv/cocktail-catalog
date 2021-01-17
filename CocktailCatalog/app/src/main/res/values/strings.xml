@@ -4,4 +4,7 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <string name="search">Search</string>
+    <string name="history">History</string>
+    <string name="add">Add Drink</string>
+    <string name="favorite">Favorite Drinks</string>
 </resources>

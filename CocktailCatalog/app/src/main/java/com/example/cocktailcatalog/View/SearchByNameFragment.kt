@@ -1,8 +1,6 @@
 package com.example.cocktailcatalog.View
 
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -18,7 +16,7 @@ import com.example.cocktailcatalog.ViewModel.DrinkViewModel
 import com.example.cocktailcatalog.ViewModel.IngredientViewModel
 import kotlinx.android.synthetic.main.fragment_search_drink.*
 
-class SearchDrinkFragment : Fragment() {
+class SearchByNameFragment : Fragment() {
 
     private lateinit var viewModel: DrinkViewModel
     private lateinit var drinkListAdapter: DrinkListAdapter
@@ -82,7 +80,7 @@ class SearchDrinkFragment : Fragment() {
     companion object {
 
         @JvmStatic
-        fun newInstance() = SearchDrinkFragment()
+        fun newInstance() = SearchByNameFragment()
     }
 
 

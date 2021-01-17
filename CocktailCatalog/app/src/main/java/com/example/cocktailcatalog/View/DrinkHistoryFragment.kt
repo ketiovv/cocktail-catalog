@@ -8,12 +8,12 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.cocktailcatalog.ViewModel.DrinkViewModel
 import com.example.cocktailcatalog.R
-import kotlinx.android.synthetic.main.drink_list_fragment.*
+import kotlinx.android.synthetic.main.drink_history_fragment.*
 
-class DrinkListFragment : Fragment() {
+class DrinkHistoryFragment : Fragment() {
 
     companion object {
-        fun newInstance() = DrinkListFragment()
+        fun newInstance() = DrinkHistoryFragment()
     }
 
     private lateinit var viewModel: DrinkViewModel
@@ -26,7 +26,7 @@ class DrinkListFragment : Fragment() {
         viewModel = ViewModelProvider(this).get(DrinkViewModel::class.java)
 
 
-        return inflater.inflate(R.layout.drink_list_fragment, container, false)
+        return inflater.inflate(R.layout.drink_history_fragment, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

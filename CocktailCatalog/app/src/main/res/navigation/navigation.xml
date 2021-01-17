@@ -3,15 +3,24 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation"
-    app:startDestination="@id/drinkListFragment">
+    app:startDestination="@id/drinkHistoryFragment">
 
     <fragment
-        android:id="@+id/drinkListFragment"
-        android:name="com.example.cocktailcatalog.View.DrinkListFragment"
-        android:label="drink_list_fragment"
-        tools:layout="@layout/drink_list_fragment" />
+        android:id="@+id/drinkHistoryFragment"
+        android:name="com.example.cocktailcatalog.View.DrinkHistoryFragment"
+        android:label="drink_history_fragment"
+        tools:layout="@layout/drink_history_fragment" />
     <fragment
-        android:id="@+id/searchDrinkFragment"
-        android:name="com.example.cocktailcatalog.View.SearchDrinkFragment"
-        android:label="SearchDrinkFragment" />
+        android:id="@+id/searchFragment"
+        android:name="com.example.cocktailcatalog.View.SearchFragment"
+        android:label="fragment_search"
+        tools:layout="@layout/fragment_search" />
+    <fragment
+        android:id="@+id/addDrinkFragment"
+        android:name="com.example.cocktailcatalog.View.AddDrinkFragment"
+        android:label="AddDrinkFragment" />
+    <fragment
+        android:id="@+id/favoriteDrinksFragment"
+        android:name="com.example.cocktailcatalog.View.FavoriteDrinksFragment"
+        android:label="FavoriteDrinksFragment" />
 </navigation>
