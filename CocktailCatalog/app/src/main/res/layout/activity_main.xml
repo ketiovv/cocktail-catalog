@@ -23,6 +23,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
+        android:background="#050505"
+        android:elevation="10dp"
+        app:elevation="10dp"
         app:itemIconTint="@color/kivi"
         app:itemTextColor="@color/kivi"
         app:menu="@menu/menu" />
