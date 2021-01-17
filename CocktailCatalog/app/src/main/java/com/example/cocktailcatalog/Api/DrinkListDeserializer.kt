@@ -5,10 +5,7 @@ import android.util.Log
 import com.example.cocktailcatalog.Model.Drink
 import com.example.cocktailcatalog.Model.DrinkList
 import com.example.cocktailcatalog.Model.Ingredient
-import com.google.gson.Gson
-import com.google.gson.JsonDeserializationContext
-import com.google.gson.JsonDeserializer
-import com.google.gson.JsonElement
+import com.google.gson.*
 import java.lang.reflect.Type
 
 class DrinkListDeserializer: JsonDeserializer<DrinkList> {
@@ -28,33 +25,42 @@ class DrinkListDeserializer: JsonDeserializer<DrinkList> {
 
 
         val jsonObject = json!!.asJsonObject
-        val jsonDrinks = jsonObject.getAsJsonArray("drinks")
+        var jsonDrinks = jsonObject.get("drinks")
 
-        for (d in jsonDrinks)
+        if(!jsonDrinks.isJsonNull)
         {
-            val drin = d.asJsonObject
-            val ingredientList = ArrayList<Ingredient>()
-            drink = gson.fromJson(d, Drink::class.java)
-            for ( i in 1..15)
+            jsonDrinks = jsonObject.getAsJsonArray("drinks")
+
+            for (d in jsonDrinks)
             {
-                val ingredientField  = "strIngredient$i"
-                val jsonIngredient = drin.get(ingredientField)
-                var ingredient = gson.fromJson(jsonIngredient, String::class.java)
-
-                if (ingredient != null)
+                val drin = d.asJsonObject
+                val ingredientList = ArrayList<Ingredient>()
+                drink = gson.fromJson(d, Drink::class.java)
+                for ( i in 1..15)
                 {
-                    val measureFiled = "strMeasure$i"
-                    val jsonMeasure = drin.get(measureFiled)
-                    var m:String
+                    val ingredientField  = "strIngredient$i"
+                    val jsonIngredient = drin.get(ingredientField)
+                    var ingredient = gson.fromJson(jsonIngredient, String::class.java)
 
-                    m = gson.fromJson(jsonMeasure, String::class.java) ?: "some"
-                    ingredientList.add(Ingredient(0,ingredient,null, m))
+                    if (ingredient != null)
+                    {
+                        val measureFiled = "strMeasure$i"
+                        val jsonMeasure = drin.get(measureFiled)
+                        var m:String
+
+                        m = gson.fromJson(jsonMeasure, String::class.java) ?: "some"
+                        ingredientList.add(Ingredient(0,ingredient,null, m))
+                    }
+                    else break
                 }
-                else break
-            }
-            drink.ingredients = ingredientList
+                drink.ingredients = ingredientList
 
-            drinkList.add(drink)
+                drinkList.add(drink)
+            }
+
+        }
+        else{
+            drinkList.add(Drink("","","","","","",""))
         }
 
         return  drinkList

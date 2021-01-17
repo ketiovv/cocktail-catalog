@@ -17,3 +17,8 @@ data class Ingredient(
         var measure: String
 ) {
 }
+
+
+class IngredientNamesList : ArrayList<String>() {
+
+}

@@ -16,7 +16,7 @@ data class Drink(
     @SerializedName("strInstructions")
     var instructions: String,
     @SerializedName("strDrinkThumb")
-    var image: URL,
+    var image: String,
     @SerializedName("strGlass")
     var glassType: String,
     @SerializedName("strAlcoholic")

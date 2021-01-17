@@ -18,8 +18,8 @@ import retrofit2.Retrofit
 import retrofit2.awaitResponse
 import retrofit2.converter.gson.GsonConverterFactory
 
-class DrinkListViewModel : ViewModel() {
-    var listOfDrinks = MutableLiveData<ArrayList<Drink>>()
+class DrinkViewModel : ViewModel() {
+    var listOfDrinks = MutableLiveData<DrinkList>()
 
 
     fun getDrinksByName(name: String){
@@ -27,7 +27,7 @@ class DrinkListViewModel : ViewModel() {
         GlobalScope.launch(Dispatchers.IO) {
 
             val api = Retrofit.Builder().baseUrl(ApiRoutes.BASE_URL)
-                .addConverterFactory(bulidGsonConverter()).build()
+                .addConverterFactory(ApiRoutes.bulidGsonConverter(DrinkList::class.java, DrinkListDeserializer())).build()
                 .create(IApiRequest::class.java)
 
             val response  = api.getDrinksByName(name).awaitResponse()
@@ -35,11 +35,10 @@ class DrinkListViewModel : ViewModel() {
             if (response.isSuccessful){
                 var data = response.body()
 
-                Log.d("myTagData", data.toString())
 
                 listOfDrinks.postValue(data)
 
-                Log.d("myTag", listOfDrinks.value.toString())
+                ///Log.d("myTag", listOfDrinks.value.toString())
 
             }
             else{
@@ -47,22 +46,6 @@ class DrinkListViewModel : ViewModel() {
             }
         }
 
-
     }
-
-    companion object{
-        private fun bulidGsonConverter(): GsonConverterFactory {
-
-
-            val gsonBuilder: GsonBuilder = GsonBuilder().registerTypeAdapter(DrinkList::class.java, DrinkListDeserializer())
-
-            //gsonBuilder.registerTypeAdapter(DrinkList::class.java, DrinkDeserializer())
-
-            val myGson = gsonBuilder.create()
-
-            return GsonConverterFactory.create(myGson)
-        }
-    }
-
 
 }

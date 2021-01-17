@@ -10,4 +10,8 @@
         android:name="com.example.cocktailcatalog.View.DrinkListFragment"
         android:label="drink_list_fragment"
         tools:layout="@layout/drink_list_fragment" />
+    <fragment
+        android:id="@+id/searchDrinkFragment"
+        android:name="com.example.cocktailcatalog.View.SearchDrinkFragment"
+        android:label="SearchDrinkFragment" />
 </navigation>
