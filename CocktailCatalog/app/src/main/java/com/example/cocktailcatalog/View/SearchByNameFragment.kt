@@ -28,12 +28,10 @@ class SearchByNameFragment : Fragment() {
         // Inflate the layout for this fragment
 
         viewModel = ViewModelProvider(this).get(DrinkViewModel::class.java)
-        ingredientViewModel = ViewModelProvider(this).get(IngredientViewModel::class.java)
         viewManager = LinearLayoutManager(requireContext())
         drinkListAdapter = DrinkListAdapter(viewModel.listOfDrinks)
-
         viewModel.getDrinksByName("margarita")
-        ingredientViewModel.getIngredientNameList()
+
 
         viewModel.listOfDrinks.observe(viewLifecycleOwner, {
             drinkListAdapter.notifyDataSetChanged()
@@ -50,11 +48,11 @@ class SearchByNameFragment : Fragment() {
             layoutManager=viewManager
         }
 
-        searchView.setOnSearchClickListener{
+        searchViewDrink.setOnSearchClickListener{
             Log.d("myTag","Chuj")
         }
 
-        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+        searchViewDrink.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
 
             override fun onQueryTextSubmit(query: String?): Boolean {
 //                if (query != null){
@@ -62,7 +60,7 @@ class SearchByNameFragment : Fragment() {
 //                    return true
 //                }
 //                else return false
-                searchView.clearFocus()
+                searchViewDrink.clearFocus()
                 return true
             }
 

@@ -14,7 +14,11 @@
         android:id="@+id/searchFragment"
         android:name="com.example.cocktailcatalog.View.SearchFragment"
         android:label="fragment_search"
-        tools:layout="@layout/fragment_search" />
+        tools:layout="@layout/fragment_search" >
+        <action
+            android:id="@+id/action_searchFragment_to_drinkDetailsFragment"
+            app:destination="@id/drinkDetailsFragment" />
+    </fragment>
     <fragment
         android:id="@+id/addDrinkFragment"
         android:name="com.example.cocktailcatalog.View.AddDrinkFragment"
@@ -23,4 +27,12 @@
         android:id="@+id/favoriteDrinksFragment"
         android:name="com.example.cocktailcatalog.View.FavoriteDrinksFragment"
         android:label="FavoriteDrinksFragment" />
+    <fragment
+        android:id="@+id/drinkDetailsFragment"
+        android:name="com.example.cocktailcatalog.View.DrinkDetailsFragment"
+        android:label="DrinkDetailsFragment" >
+        <action
+            android:id="@+id/action_drinkDetailsFragment_to_searchFragment"
+            app:destination="@id/searchFragment" />
+    </fragment>
 </navigation>

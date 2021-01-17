@@ -10,7 +10,7 @@
     <!-- TODO: Update blank fragment layout -->
 
     <SearchView
-        android:id="@+id/searchView"
+        android:id="@+id/searchViewDrink"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:iconifiedByDefault="false"
@@ -27,6 +27,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/searchView" />
+        app:layout_constraintTop_toBottomOf="@+id/searchViewDrink" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
