@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation"
+    app:startDestination="@id/drinkListFragment">
+
+    <fragment
+        android:id="@+id/drinkListFragment"
+        android:name="com.example.cocktailcatalog.View.DrinkListFragment"
+        android:label="drink_list_fragment"
+        tools:layout="@layout/drink_list_fragment" />
+</navigation>

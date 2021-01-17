@@ -4,6 +4,8 @@ import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 import java.net.URL
 
+
+
 data class Drink(
     @SerializedName("idDrink")
     var id: String,
@@ -13,11 +15,16 @@ data class Drink(
     var category: String,
     @SerializedName("strInstructions")
     var instructions: String,
-    var ingrediends: MutableList<Ingredient>,
     @SerializedName("strDrinkThumb")
     var image: URL,
     @SerializedName("strGlass")
-    var glassType: GlassType,
+    var glassType: String,
     @SerializedName("strAlcoholic")
-    var alcoholic: Boolean)  {
+    var alcoholic: String)  {
+     lateinit var  ingredients : ArrayList<Ingredient>
+}
+
+
+class DrinkList : ArrayList<Drink>() {
+
 }
