@@ -13,6 +13,7 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.cocktailcatalog.Model.DrinkList
 import com.example.cocktailcatalog.R
+import com.example.cocktailcatalog.ViewModel.DrinkViewModel
 
 
 class DrinkListAdapter(var drinks: LiveData<DrinkList>) :RecyclerView.Adapter<DrinkListAdapter.Holder>(){
@@ -33,6 +34,7 @@ class DrinkListAdapter(var drinks: LiveData<DrinkList>) :RecyclerView.Adapter<Dr
         textViewTitle.text =  drinks.value?.get(position)?.name
 
         rowDrink.setOnClickListener {
+            DrinkViewModel.selectedDrink =  drinks.value?.get(position)!!
             it.findNavController().navigate(R.id.action_searchFragment_to_drinkDetailsFragment)
         }
 

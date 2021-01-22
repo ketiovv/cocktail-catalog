@@ -48,7 +48,7 @@ class DrinkListDeserializer: JsonDeserializer<DrinkList> {
                         val jsonMeasure = drin.get(measureFiled)
                         var m:String
 
-                        m = gson.fromJson(jsonMeasure, String::class.java) ?: "some"
+                        m = gson.fromJson(jsonMeasure, String::class.java) ?: "Some"
                         ingredientList.add(Ingredient(0,ingredient,null, m))
                     }
                     else break
@@ -60,7 +60,7 @@ class DrinkListDeserializer: JsonDeserializer<DrinkList> {
 
         }
         else{
-            drinkList.add(Drink("","","","","","",""))
+            drinkList.add(Drink("","","","","","","",false))
         }
 
         return  drinkList

@@ -48,4 +48,7 @@ class DrinkViewModel : ViewModel() {
 
     }
 
+    companion object{
+        lateinit var selectedDrink: Drink
+    }
 }
