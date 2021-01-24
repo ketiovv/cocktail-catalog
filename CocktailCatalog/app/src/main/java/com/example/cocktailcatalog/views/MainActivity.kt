@@ -1,10 +1,8 @@
-package com.example.cocktailcatalog.View
+package com.example.cocktailcatalog.views
 
 import android.annotation.SuppressLint
-import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.annotation.RequiresApi
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.cocktailcatalog.R

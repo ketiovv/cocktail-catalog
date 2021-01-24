@@ -1,4 +1,4 @@
-package com.example.cocktailcatalog.View
+package com.example.cocktailcatalog.views
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

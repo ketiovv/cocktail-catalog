@@ -1,19 +1,17 @@
-package com.example.cocktailcatalog.Adapters
+package com.example.cocktailcatalog.adapters
 
 import android.annotation.SuppressLint
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
-import com.example.cocktailcatalog.Model.DrinkList
+import com.example.cocktailcatalog.models.DrinkList
 import com.example.cocktailcatalog.R
-import com.example.cocktailcatalog.ViewModel.DrinkViewModel
+import com.example.cocktailcatalog.viewmodels.DrinkViewModel
 
 
 class DrinkListAdapter(var drinks: LiveData<DrinkList>) :RecyclerView.Adapter<DrinkListAdapter.Holder>(){

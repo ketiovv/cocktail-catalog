@@ -1,4 +1,4 @@
-package com.example.cocktailcatalog.Api
+package com.example.cocktailcatalog.api
 
 import com.google.gson.GsonBuilder
 import retrofit2.converter.gson.GsonConverterFactory

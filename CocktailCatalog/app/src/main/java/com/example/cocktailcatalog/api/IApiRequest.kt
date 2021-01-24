@@ -1,13 +1,9 @@
-package com.example.cocktailcatalog.Api
+package com.example.cocktailcatalog.api
 
-import com.example.cocktailcatalog.Model.Drink
-import com.example.cocktailcatalog.Model.DrinkList
-import com.example.cocktailcatalog.Model.IngredientNamesList
-import okhttp3.ResponseBody
+import com.example.cocktailcatalog.models.DrinkList
+import com.example.cocktailcatalog.models.IngredientNamesList
 import retrofit2.http.GET
-import java.util.ArrayList
 import retrofit2.Call
-import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface IApiRequest {

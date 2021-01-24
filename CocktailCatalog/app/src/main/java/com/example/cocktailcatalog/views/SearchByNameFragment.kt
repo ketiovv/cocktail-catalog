@@ -1,4 +1,4 @@
-package com.example.cocktailcatalog.View
+package com.example.cocktailcatalog.views
 
 import android.os.Bundle
 import android.util.Log
@@ -10,10 +10,10 @@ import android.widget.SearchView
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.cocktailcatalog.Adapters.DrinkListAdapter
+import com.example.cocktailcatalog.adapters.DrinkListAdapter
 import com.example.cocktailcatalog.R
-import com.example.cocktailcatalog.ViewModel.DrinkViewModel
-import com.example.cocktailcatalog.ViewModel.IngredientViewModel
+import com.example.cocktailcatalog.viewmodels.DrinkViewModel
+import com.example.cocktailcatalog.viewmodels.IngredientViewModel
 import kotlinx.android.synthetic.main.fragment_search_drink.*
 
 class SearchByNameFragment : Fragment() {

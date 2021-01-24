@@ -1,9 +1,7 @@
-package com.example.cocktailcatalog.Model
+package com.example.cocktailcatalog.models.entities
 
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
-import java.net.URL
-
 
 
 data class Drink(

@@ -1,10 +1,10 @@
-package com.example.cocktailcatalog.Api
+package com.example.cocktailcatalog.api
 
 
 import android.util.Log
-import com.example.cocktailcatalog.Model.Drink
-import com.example.cocktailcatalog.Model.DrinkList
-import com.example.cocktailcatalog.Model.Ingredient
+import com.example.cocktailcatalog.models.Drink
+import com.example.cocktailcatalog.models.DrinkList
+import com.example.cocktailcatalog.models.Ingredient
 import com.google.gson.*
 import java.lang.reflect.Type
 

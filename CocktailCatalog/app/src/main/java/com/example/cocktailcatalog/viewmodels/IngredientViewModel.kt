@@ -1,24 +1,17 @@
-package com.example.cocktailcatalog.ViewModel
+package com.example.cocktailcatalog.viewmodels
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.cocktailcatalog.Api.ApiRoutes
-import com.example.cocktailcatalog.Api.DrinkListDeserializer
-import com.example.cocktailcatalog.Api.IApiRequest
-import com.example.cocktailcatalog.Api.IngredientsNamesListDeserializer
-import com.example.cocktailcatalog.Model.Drink
-import com.example.cocktailcatalog.Model.DrinkList
-import com.example.cocktailcatalog.Model.IngredientNamesList
-import com.google.gson.GsonBuilder
-import com.google.gson.TypeAdapter
+import com.example.cocktailcatalog.api.ApiRoutes
+import com.example.cocktailcatalog.api.IApiRequest
+import com.example.cocktailcatalog.api.IngredientsNamesListDeserializer
+import com.example.cocktailcatalog.models.IngredientNamesList
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import retrofit2.Retrofit
 import retrofit2.awaitResponse
-import retrofit2.converter.gson.GsonConverterFactory
-import java.lang.reflect.Type
 
 class IngredientViewModel : ViewModel() {
     var listOfIngredientNames = MutableLiveData<IngredientNamesList>()

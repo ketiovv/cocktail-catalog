@@ -1,4 +1,4 @@
-package com.example.cocktailcatalog.View
+package com.example.cocktailcatalog.views
 
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -9,7 +9,7 @@ import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import com.example.cocktailcatalog.R
-import com.example.cocktailcatalog.ViewModel.DrinkViewModel
+import com.example.cocktailcatalog.viewmodels.DrinkViewModel
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_drink_details.*
 

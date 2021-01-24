@@ -1,4 +1,4 @@
-package com.example.cocktailcatalog.View
+package com.example.cocktailcatalog.views
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -8,11 +8,9 @@ import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.cocktailcatalog.Adapters.DrinkListAdapter
-import com.example.cocktailcatalog.Adapters.IngredientListAdapter
+import com.example.cocktailcatalog.adapters.IngredientListAdapter
 import com.example.cocktailcatalog.R
-import com.example.cocktailcatalog.ViewModel.DrinkViewModel
-import com.example.cocktailcatalog.ViewModel.IngredientViewModel
+import com.example.cocktailcatalog.viewmodels.IngredientViewModel
 import kotlinx.android.synthetic.main.fragment_search_by_ingredient.*
 import kotlinx.android.synthetic.main.fragment_search_drink.*
 
