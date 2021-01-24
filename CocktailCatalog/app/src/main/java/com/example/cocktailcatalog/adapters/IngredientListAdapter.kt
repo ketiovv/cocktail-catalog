@@ -7,8 +7,8 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.lifecycle.LiveData
 import androidx.recyclerview.widget.RecyclerView
-import com.example.cocktailcatalog.models.IngredientNamesList
 import com.example.cocktailcatalog.R
+import com.example.cocktailcatalog.models.entities.IngredientNamesList
 
 
 class IngredientListAdapter(var ingredients: LiveData<IngredientNamesList>) :RecyclerView.Adapter<IngredientListAdapter.Holder>(){

@@ -2,9 +2,9 @@ package com.example.cocktailcatalog.api
 
 
 import android.util.Log
-import com.example.cocktailcatalog.models.Drink
-import com.example.cocktailcatalog.models.DrinkList
-import com.example.cocktailcatalog.models.Ingredient
+import com.example.cocktailcatalog.models.entities.Drink
+import com.example.cocktailcatalog.models.entities.DrinkList
+import com.example.cocktailcatalog.models.entities.Ingredient
 import com.google.gson.*
 import java.lang.reflect.Type
 

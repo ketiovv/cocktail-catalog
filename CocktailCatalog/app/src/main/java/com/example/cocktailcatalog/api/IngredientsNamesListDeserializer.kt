@@ -2,8 +2,8 @@ package com.example.cocktailcatalog.api
 
 
 import android.util.Log
-import com.example.cocktailcatalog.models.DrinkList
-import com.example.cocktailcatalog.models.IngredientNamesList
+import com.example.cocktailcatalog.models.entities.DrinkList
+import com.example.cocktailcatalog.models.entities.IngredientNamesList
 import com.google.gson.Gson
 import com.google.gson.JsonDeserializationContext
 import com.google.gson.JsonDeserializer

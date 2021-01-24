@@ -6,8 +6,8 @@ import androidx.lifecycle.ViewModel
 import com.example.cocktailcatalog.api.ApiRoutes
 import com.example.cocktailcatalog.api.DrinkListDeserializer
 import com.example.cocktailcatalog.api.IApiRequest
-import com.example.cocktailcatalog.models.Drink
-import com.example.cocktailcatalog.models.DrinkList
+import com.example.cocktailcatalog.models.entities.Drink
+import com.example.cocktailcatalog.models.entities.DrinkList
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch

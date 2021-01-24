@@ -9,7 +9,7 @@ import android.widget.TextView
 import androidx.lifecycle.LiveData
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
-import com.example.cocktailcatalog.models.DrinkList
+import com.example.cocktailcatalog.models.entities.DrinkList
 import com.example.cocktailcatalog.R
 import com.example.cocktailcatalog.viewmodels.DrinkViewModel
 

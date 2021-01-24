@@ -1,7 +1,7 @@
 package com.example.cocktailcatalog.api
 
-import com.example.cocktailcatalog.models.DrinkList
-import com.example.cocktailcatalog.models.IngredientNamesList
+import com.example.cocktailcatalog.models.entities.DrinkList
+import com.example.cocktailcatalog.models.entities.IngredientNamesList
 import retrofit2.http.GET
 import retrofit2.Call
 import retrofit2.http.Query
