@@ -11,7 +11,7 @@ import com.example.cocktailcatalog.R
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
-    @RequiresApi(Build.VERSION_CODES.P)
+    //@RequiresApi(Build.VERSION_CODES.P)
     @SuppressLint("ResourceAsColor")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -19,7 +19,7 @@ class MainActivity : AppCompatActivity() {
 
         val navController = findNavController(R.id.fragment)
         bottomNavigationView.setupWithNavController(navController)
-        bottomNavigationView.outlineAmbientShadowColor = R.color.white
+        //bottomNavigationView.outlineAmbientShadowColor = R.color.white
 
     }
 }
