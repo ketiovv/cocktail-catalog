@@ -1,11 +1,14 @@
 package com.example.cocktailcatalog.View
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.SearchView
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.cocktailcatalog.Adapters.DrinkListAdapter
@@ -32,9 +35,10 @@ class SearchByIngredientFragment : Fragment() {
         ingredientViewModel = ViewModelProvider(this).get(IngredientViewModel::class.java)
         ingredientViewModel.getIngredientNameList()
 
-        ingredientListAdapter = IngredientListAdapter(ingredientViewModel.listOfIngredientNames)
+        ingredientListAdapter = IngredientListAdapter(ingredientViewModel.listOfIngredientNames )
 
         ingredientViewModel.listOfIngredientNames.observe(viewLifecycleOwner, {
+            ingredientListAdapter.ingredientsUnFiltered = ingredientViewModel.listOfIngredientNames.value!!
             ingredientListAdapter.notifyDataSetChanged()
         })
 
@@ -49,6 +53,28 @@ class SearchByIngredientFragment : Fragment() {
             adapter = ingredientListAdapter
             layoutManager=viewManager
         }
+
+        buttonSearch.setOnClickListener {
+            IngredientViewModel.selectedIngredients = ingredientListAdapter.selectedIngredient
+            it.findNavController().navigate(R.id.action_searchFragment_to_searchResultsFragment)
+        }
+
+//        searchViewIngredient.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+//            override fun onQueryTextSubmit(query: String?): Boolean {
+////                if (query != null){
+////                    viewModel.getDrinksByName(query)
+////                    return true
+////                }
+////                else return false
+//                searchViewIngredient.clearFocus()
+//                return true
+//            }
+//
+//            override fun onQueryTextChange(newText: String?): Boolean {
+//                ingredientListAdapter.filter.filter(newText)
+//                return true
+//            }
+//        })
 
     }
 

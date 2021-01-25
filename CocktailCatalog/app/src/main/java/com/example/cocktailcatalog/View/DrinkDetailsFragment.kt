@@ -34,7 +34,7 @@ class DrinkDetailsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         textViewDrinkNameD.text = DrinkViewModel.selectedDrink.name
-
+        textViewInstructions.text = DrinkViewModel.selectedDrink.instructions
 
         Picasso.get().load(DrinkViewModel.selectedDrink.image).resize(700, 700)
                 .centerCrop()

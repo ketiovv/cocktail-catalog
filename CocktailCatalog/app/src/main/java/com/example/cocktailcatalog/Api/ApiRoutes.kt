@@ -6,7 +6,7 @@ import java.lang.reflect.Type
 
 class ApiRoutes {
     companion object{
-        const val BASE_URL = "https://www.thecocktaildb.com/api/json/v1/1/"
+        const val BASE_URL = "https://www.thecocktaildb.com/api/json/v2/9973533/"
 
         fun bulidGsonConverter(type: Type, typeAdapter: Any): GsonConverterFactory {
 

@@ -34,5 +34,4 @@ data class Drink(
 
 
 class DrinkList : ArrayList<Drink>() {
-
 }

@@ -11,4 +11,6 @@
     <string name="add_to_favorite">add drink to favorites</string>
     <string name="remove_from_favorite">remove drink from favorites</string>
     <string name="ingredients">Ingredients:</string>
+    <string name="search_results">Drinks that You can make:</string>
+    <string name="no_drinks_found">Sorry, no drinks found</string>
 </resources>

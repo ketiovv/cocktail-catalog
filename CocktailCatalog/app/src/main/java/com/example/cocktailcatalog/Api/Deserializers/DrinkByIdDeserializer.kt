@@ -1,4 +1,4 @@
-package com.example.cocktailcatalog.Api
+package com.example.cocktailcatalog.Api.Deserializers
 
 
 import android.util.Log
@@ -8,17 +8,15 @@ import com.example.cocktailcatalog.Model.Ingredient
 import com.google.gson.*
 import java.lang.reflect.Type
 
-class DrinkListDeserializer: JsonDeserializer<DrinkList> {
+class DrinkByIdDeserializer: JsonDeserializer<Drink> {
     override fun deserialize(
         json: JsonElement?,
         typeOfT: Type?,
         context: JsonDeserializationContext?
-    ): DrinkList {
-        Log.d("Test/Deserializer", "Using a custom deserializer for the Login request")
+    ): Drink {
+        //Log.d("Test/Deserializer", "Using a custom deserializer for the Login request")
 
         val gson = Gson()
-
-        val drinkList = DrinkList()
 
         var drink = gson.fromJson(json, Drink::class.java)
 
@@ -55,14 +53,14 @@ class DrinkListDeserializer: JsonDeserializer<DrinkList> {
                 }
                 drink.ingredients = ingredientList
 
-                drinkList.add(drink)
+
             }
 
         }
         else{
-            drinkList.add(Drink("","","","","","","",false))
+            drink = Drink("","","","","","","",false)
         }
 
-        return  drinkList
+        return  drink
     }
 }

@@ -4,21 +4,14 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.cocktailcatalog.Api.ApiRoutes
-import com.example.cocktailcatalog.Api.DrinkListDeserializer
 import com.example.cocktailcatalog.Api.IApiRequest
-import com.example.cocktailcatalog.Api.IngredientsNamesListDeserializer
-import com.example.cocktailcatalog.Model.Drink
-import com.example.cocktailcatalog.Model.DrinkList
+import com.example.cocktailcatalog.Api.Deserializers.IngredientsNamesListDeserializer
 import com.example.cocktailcatalog.Model.IngredientNamesList
-import com.google.gson.GsonBuilder
-import com.google.gson.TypeAdapter
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import retrofit2.Retrofit
 import retrofit2.awaitResponse
-import retrofit2.converter.gson.GsonConverterFactory
-import java.lang.reflect.Type
 
 class IngredientViewModel : ViewModel() {
     var listOfIngredientNames = MutableLiveData<IngredientNamesList>()
@@ -36,11 +29,11 @@ class IngredientViewModel : ViewModel() {
             if (response.isSuccessful){
                 var data = response.body()
 
-                Log.d("myTagData", data.toString())
+               // Log.d("myTagData", data.toString())
 
                 listOfIngredientNames.postValue(data)
 
-                Log.d("myTag", listOfIngredientNames.value.toString())
+                //Log.d("myTag", listOfIngredientNames.value.toString())
 
             }
             else{
@@ -49,6 +42,7 @@ class IngredientViewModel : ViewModel() {
         }
     }
     companion object{
-
+            //TODO: Use viewmodel factory?
+        lateinit var selectedIngredients : IngredientNamesList
     }
 }
