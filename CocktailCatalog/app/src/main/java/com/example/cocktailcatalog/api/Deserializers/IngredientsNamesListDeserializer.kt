@@ -1,7 +1,6 @@
-package com.example.cocktailcatalog.api
+package com.example.cocktailcatalog.api.Deserializers
 
 
-import android.util.Log
 import com.example.cocktailcatalog.models.entities.DrinkList
 import com.example.cocktailcatalog.models.entities.IngredientNamesList
 import com.google.gson.Gson
@@ -16,7 +15,7 @@ class IngredientsNamesListDeserializer: JsonDeserializer<IngredientNamesList> {
         typeOfT: Type?,
         context: JsonDeserializationContext?
     ): IngredientNamesList {
-        Log.d("Test/Deserializer", "Using a custom deserializer for the Login request")
+        //Log.d("Test/Deserializer", "Using a custom deserializer for the Login request")
 
         val gson = Gson()
 

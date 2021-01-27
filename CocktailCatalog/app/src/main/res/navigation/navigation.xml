@@ -18,6 +18,9 @@
         <action
             android:id="@+id/action_searchFragment_to_drinkDetailsFragment"
             app:destination="@id/drinkDetailsFragment" />
+        <action
+            android:id="@+id/action_searchFragment_to_searchResultsFragment"
+            app:destination="@id/searchResultsFragment" />
     </fragment>
     <fragment
         android:id="@+id/addDrinkFragment"
@@ -34,5 +37,20 @@
         <action
             android:id="@+id/action_drinkDetailsFragment_to_searchFragment"
             app:destination="@id/searchFragment" />
+        <action
+            android:id="@+id/action_drinkDetailsFragment_to_searchResultsFragment"
+            app:destination="@id/searchResultsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/searchResultsFragment"
+        android:name="com.example.cocktailcatalog.views.SearchResultsFragment"
+        android:label="fragment_search_results"
+        tools:layout="@layout/fragment_search_results" >
+        <action
+            android:id="@+id/action_searchResultsFragment_to_searchFragment"
+            app:destination="@id/searchFragment" />
+        <action
+            android:id="@+id/action_searchResultsFragment_to_drinkDetailsFragment"
+            app:destination="@id/drinkDetailsFragment" />
     </fragment>
 </navigation>

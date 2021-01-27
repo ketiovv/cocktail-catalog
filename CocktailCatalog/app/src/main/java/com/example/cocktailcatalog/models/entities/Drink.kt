@@ -1,11 +1,7 @@
 package com.example.cocktailcatalog.models.entities
 
-import androidx.room.Entity
-import androidx.room.Ignore
-import androidx.room.PrimaryKey
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
-
 
 data class Drink(
         @Expose
@@ -30,11 +26,9 @@ data class Drink(
         var alcoholic: String,
         @Expose(deserialize = false)
         var favorite: Boolean)  {
-        @Ignore
         lateinit var  ingredients : ArrayList<Ingredient>
 }
 
 
 class DrinkList : ArrayList<Drink>() {
-
 }
