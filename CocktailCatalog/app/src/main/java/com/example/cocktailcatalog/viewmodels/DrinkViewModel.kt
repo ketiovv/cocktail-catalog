@@ -1,22 +1,50 @@
 package com.example.cocktailcatalog.viewmodels
 
+import android.app.Application
 import android.util.Log
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.cocktailcatalog.api.ApiRoutes
 import com.example.cocktailcatalog.api.DrinkListDeserializer
 import com.example.cocktailcatalog.api.IApiRequest
+import com.example.cocktailcatalog.models.AppDatabase
 import com.example.cocktailcatalog.models.entities.Drink
 import com.example.cocktailcatalog.models.entities.DrinkList
+import com.example.cocktailcatalog.models.entities.LocalDrink
+import com.example.cocktailcatalog.models.repositories.DrinkRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import retrofit2.Retrofit
 import retrofit2.awaitResponse
 
-class DrinkViewModel : ViewModel() {
+class DrinkViewModel(application: Application) : AndroidViewModel(application) {
     var listOfDrinks = MutableLiveData<DrinkList>()
 
+    private val drinkRepository = DrinkRepository(AppDatabase.getDatabase(application).drinkDao())
+
+    fun addDrinkToLocalDatabase(
+            name: String,
+            category: String,
+            instructions: String,
+            imgUrl: String,
+            glassType: String,
+            alcoholic: String, ){
+        val drink = LocalDrink(
+                0,
+                name,
+                category,
+                instructions,
+                imgUrl,
+                glassType,
+                alcoholic
+        )
+
+        viewModelScope.launch {
+            drinkRepository.add(drink)
+        }
+    }
 
     fun getDrinksByName(name: String){
 
