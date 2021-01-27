@@ -11,7 +11,7 @@ import com.google.gson.annotations.SerializedName
 data class Ingredient(
         @Expose
         @SerializedName("idIngredient")
-        @PrimaryKey
+        @PrimaryKey(autoGenerate = true)
         var id: Int,
         @Expose
         @SerializedName("strIngredient")
