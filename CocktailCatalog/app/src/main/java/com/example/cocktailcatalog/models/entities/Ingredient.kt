@@ -16,9 +16,6 @@ data class Ingredient(
         @Expose
         @SerializedName("strIngredient")
         var name: String,
-        @Expose
-        @SerializedName("strDescription")
-        var description: String?,
         @Expose(serialize = false, deserialize = false)
         var measure: String
 ) {

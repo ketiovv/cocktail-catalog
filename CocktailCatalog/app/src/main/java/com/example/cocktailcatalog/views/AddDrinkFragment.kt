@@ -75,14 +75,17 @@ class AddDrinkFragment : Fragment() {
             layoutManager = viewManager
         }
 
-        
+        val selected = ingredientListAdapter.selectedIngredient
 
         val name = editTextNewDrinkName.text;
         buttonAddDrinkToLocalDatabase.setOnClickListener {
             if (name.toString().isNullOrBlank()){
                 editTextNewDrinkName.error = "Name can't be empty!"
-            }
+            }//TODO: jakaś walidacja, typu selected.count >= 1
             else{
+                // TODO: zamiast tego co się tu odpierdala bezpośrednio - przekazujemy to bundlem
+                // TODO: do nastepnego fragmentu, ktory już ma pełne prawo to odpierdalać
+                // TODO: gdyż tam podamy wszelkie pozostałe dane
                 drinkViewModel.addDrinkToLocalDatabase(
                         name.toString(),
                         "test",
@@ -90,7 +93,11 @@ class AddDrinkFragment : Fragment() {
                         "test",
                         "test",
                         "test")
+                for (x in selected){
+                    Log.d("test", x)
+                }
             }
+
         }
     }
 
