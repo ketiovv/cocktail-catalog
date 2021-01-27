@@ -47,8 +47,21 @@ class AddDrinkFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val name = editTextNewDrinkName.text;
+
         buttonAddDrinkToLocalDatabase.setOnClickListener {
-            drinkViewModel.addDrinkToLocalDatabase("test","test", "test", "test", "test", "test")
+            if (name.toString().isNullOrBlank()){
+                editTextNewDrinkName.error = "Name can't be empty!"
+            }
+            else{
+                drinkViewModel.addDrinkToLocalDatabase(
+                        name.toString(),
+                        "test",
+                        "test",
+                        "test",
+                        "test",
+                        "test")
+            }
         }
     }
 

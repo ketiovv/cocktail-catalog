@@ -6,14 +6,50 @@
     android:layout_height="match_parent"
     tools:context=".views.AddDrinkFragment">
 
+    <TextView
+        android:id="@+id/textViewNewDrinkTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:text="Add new drink"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:textColor="#FFFFFF"
+        android:textSize="27sp"/>
+
+    <TextView
+        android:id="@+id/textViewNewDrinkNameLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="32dp"
+        android:text="Name"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewNewDrinkTitle" />
+
+    <EditText
+        android:id="@+id/editTextNewDrinkName"
+        android:layout_width="253dp"
+        android:layout_height="43dp"
+        android:layout_marginTop="24dp"
+        android:ems="10"
+        android:inputType="text"
+        app:layout_constraintStart_toStartOf="@+id/textViewNewDrinkTitle"
+        app:layout_constraintTop_toBottomOf="@+id/textViewNewDrinkTitle" />
 
     <Button
         android:id="@+id/buttonAddDrinkToLocalDatabase"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="44dp"
+        android:layout_marginTop="128dp"
         android:text="add"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toStartOf="@+id/editTextNewDrinkName"
+        app:layout_constraintTop_toBottomOf="@+id/editTextNewDrinkName" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
