@@ -7,9 +7,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.cocktailcatalog.R
+import com.example.cocktailcatalog.adapters.IngredientListAdapter
 import com.example.cocktailcatalog.viewmodels.DrinkViewModel
+import com.example.cocktailcatalog.viewmodels.IngredientViewModel
 import kotlinx.android.synthetic.main.fragment_add_drink.*
+import kotlinx.android.synthetic.main.fragment_search_by_ingredient.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -25,7 +30,12 @@ class AddDrinkFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
+
     private lateinit var drinkViewModel:DrinkViewModel
+    private lateinit var ingredientViewModel: IngredientViewModel
+
+    private lateinit var ingredientListAdapter: IngredientListAdapter
+    private lateinit var viewManager: RecyclerView.LayoutManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,6 +50,18 @@ class AddDrinkFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         drinkViewModel = ViewModelProvider(requireActivity()).get(DrinkViewModel::class.java)
+        ingredientViewModel = ViewModelProvider(requireActivity()).get(IngredientViewModel::class.java)
+        ingredientViewModel.getIngredientNameList()
+
+        ingredientListAdapter = IngredientListAdapter(ingredientViewModel.listOfIngredientNames )
+
+        viewManager = LinearLayoutManager(requireContext())
+
+
+        ingredientViewModel.listOfIngredientNames.observe(viewLifecycleOwner, {
+            ingredientListAdapter.ingredientsUnFiltered = ingredientViewModel.listOfIngredientNames.value!!
+            ingredientListAdapter.notifyDataSetChanged()
+        })
 
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_add_drink, container, false)
@@ -48,7 +70,12 @@ class AddDrinkFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val spinner = spinnerIngredients;
+        recyclerViewIngredientListToCheck.apply{
+            adapter = ingredientListAdapter
+            layoutManager = viewManager
+        }
+
+        
 
         val name = editTextNewDrinkName.text;
         buttonAddDrinkToLocalDatabase.setOnClickListener {

@@ -9,8 +9,10 @@ import android.widget.*
 import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.RecyclerView
 import com.example.cocktailcatalog.R
+import com.example.cocktailcatalog.models.entities.Ingredient
 import com.example.cocktailcatalog.models.entities.IngredientNamesList
 import java.util.*
+import kotlin.collections.ArrayList
 
 
 class IngredientListAdapter(var ingredients: MutableLiveData<IngredientNamesList>) :RecyclerView.Adapter<IngredientListAdapter.Holder>(){
