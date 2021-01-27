@@ -6,12 +6,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
-import android.widget.Spinner
 import androidx.lifecycle.ViewModelProvider
 import com.example.cocktailcatalog.R
-import com.example.cocktailcatalog.adapters.IngredientSpinnerAdapter
-import com.example.cocktailcatalog.models.entities.SpinnerItemState
 import com.example.cocktailcatalog.viewmodels.DrinkViewModel
 import kotlinx.android.synthetic.main.fragment_add_drink.*
 
@@ -53,17 +49,6 @@ class AddDrinkFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val spinner = spinnerIngredients;
-
-        val testArray = arrayOf("test1","test2","test3","test4")
-        val listSpinnerIngredients = ArrayList<SpinnerItemState>()
-
-        for (x in testArray){
-            val state = SpinnerItemState(x,false)
-            listSpinnerIngredients.add(state)
-        }
-        val adapter = IngredientSpinnerAdapter(requireContext(),0, listSpinnerIngredients)
-        spinner.adapter = adapter
-        Log.d("xd","xd")
 
         val name = editTextNewDrinkName.text;
         buttonAddDrinkToLocalDatabase.setOnClickListener {
