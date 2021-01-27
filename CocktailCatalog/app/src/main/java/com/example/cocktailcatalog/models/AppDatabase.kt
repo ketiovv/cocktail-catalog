@@ -10,9 +10,10 @@ import com.example.cocktailcatalog.models.dao.IngredientDao
 import com.example.cocktailcatalog.models.entities.Drink
 import com.example.cocktailcatalog.models.entities.DrinkIngredient
 import com.example.cocktailcatalog.models.entities.Ingredient
+import com.example.cocktailcatalog.models.entities.LocalDrink
 
 @Database(
-    entities = [Drink::class,
+    entities = [LocalDrink::class,
                 DrinkIngredient::class,
                 Ingredient::class],
     version = 1,

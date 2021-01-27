@@ -9,7 +9,7 @@ import androidx.room.PrimaryKey
     tableName = "drink_ingredient_table",
     foreignKeys = [
         ForeignKey(
-            entity = Drink::class,
+            entity = LocalDrink::class,
             parentColumns = ["id"],
             childColumns = ["drink_id"],
             onDelete = CASCADE
@@ -22,4 +22,8 @@ import androidx.room.PrimaryKey
         )
     ]
 )
-data class DrinkIngredient(@PrimaryKey var id: Int, var drink_id:Int, var ingredient_id:Int)
+data class DrinkIngredient(
+        @PrimaryKey(autoGenerate = true)
+        var id: Int,
+        var drink_id:Int,
+        var ingredient_id:Int)

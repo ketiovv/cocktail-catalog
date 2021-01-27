@@ -6,13 +6,10 @@ import androidx.room.PrimaryKey
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
-@Entity(
-    tableName = "drink_table"
-)
+
 data class Drink(
         @Expose
         @SerializedName("idDrink")
-        @PrimaryKey
         var id: String,
         @SerializedName("strDrink")
         var name:String,
