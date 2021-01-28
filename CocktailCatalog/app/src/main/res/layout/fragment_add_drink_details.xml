@@ -25,8 +25,29 @@
         android:layout_marginStart="32dp"
         android:layout_marginTop="16dp"
         android:ems="10"
-        android:inputType="textLongMessage|textMultiLine"
+        android:inputType="textMultiLine"
         app:layout_constraintStart_toEndOf="@+id/textViewNewDrinkDescriptionLabel"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewIngredientsMeasureEntering"
+        android:layout_width="360dp"
+        android:layout_height="241dp"
+        android:layout_marginTop="16dp"
+        android:overScrollMode="ifContentScrolls"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextNewDrinkDescription" />
+
+    <Button
+        android:id="@+id/buttonAddDrinkToLocalDatabase"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="144dp"
+        android:layout_marginTop="20dp"
+        android:text="add drink"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/recyclerViewIngredientsMeasureEntering" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
