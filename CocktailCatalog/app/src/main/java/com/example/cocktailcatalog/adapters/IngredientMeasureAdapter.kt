@@ -40,7 +40,7 @@ class IngredientMeasureAdapter(var ingredients: ArrayList<Ingredient>):RecyclerV
             override fun onItemSelected(
                 parent: AdapterView<*>?,
                 view: View?,
-                position: Int,
+                positionInSpinner: Int,
                 id: Long
             ) {
                 ingredients[position].measure = measureValue.text.toString() + " " + spinner.selectedItem
