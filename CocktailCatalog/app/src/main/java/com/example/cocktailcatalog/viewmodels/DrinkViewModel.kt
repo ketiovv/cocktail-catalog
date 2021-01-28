@@ -3,6 +3,7 @@ package com.example.cocktailcatalog.viewmodels
 import android.app.Application
 import android.util.Log
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.cocktailcatalog.api.ApiRoutes
 import com.example.cocktailcatalog.api.Deserializers.DrinkByIdDeserializer
@@ -26,7 +27,7 @@ class DrinkViewModel(application: Application) : AndroidViewModel(application) {
     var listOfDrinks = MutableLiveData<DrinkList>()
 
     private val drinkRepository = DrinkRepository(AppDatabase.getDatabase(application).drinkDao())
-
+    private val allLocalDrinks = drinkRepository.allDrinks
 
     // DB METHODS
     suspend fun addDrinkToLocalDatabase(
