@@ -5,12 +5,18 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.viewpager2.adapter.FragmentStateAdapter
+import androidx.viewpager2.widget.ViewPager2
 import com.example.cocktailcatalog.R
+import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayoutMediator
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
+
+
 
 /**
  * A simple [Fragment] subclass.
@@ -21,6 +27,9 @@ class FavoriteDrinksFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
+
+    private lateinit var favCollectionAdapter: FavCollectionAdapter
+    private lateinit var viewPager: ViewPager2
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,6 +45,22 @@ class FavoriteDrinksFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_favorite_drinks, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        favCollectionAdapter = FavCollectionAdapter(this)
+        viewPager = view.findViewById(R.id.viewPagerFavourite)
+        viewPager.adapter = favCollectionAdapter
+
+        val tabLayout = view.findViewById<TabLayout>(R.id.tabLayoutFavourite)
+        TabLayoutMediator(tabLayout, viewPager) { tab, position ->
+            if (position == 0)
+                tab.text = "FAVOURITE"
+            else if (position ==1 )
+                tab.text = "OWN"
+        }.attach()
     }
 
     companion object {
@@ -56,5 +81,23 @@ class FavoriteDrinksFragment : Fragment() {
                     putString(ARG_PARAM2, param2)
                 }
             }
+    }
+
+
+}
+
+class FavCollectionAdapter(fragment: Fragment) : FragmentStateAdapter(fragment) {
+
+    override fun getItemCount(): Int = 2
+
+    override fun createFragment(position: Int): Fragment {
+        var fragment = Fragment()
+
+        if(position == 0)
+            fragment = SearchByNameFragment.newInstance()
+        else
+            fragment = SearchByIngredientFragment.newInstance()
+
+        return fragment
     }
 }
