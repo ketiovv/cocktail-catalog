@@ -8,16 +8,19 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.cocktailcatalog.R
 import com.example.cocktailcatalog.adapters.IngredientMeasureAdapter
 import com.example.cocktailcatalog.models.entities.LocalDrinkNameAndIngredients
+import com.example.cocktailcatalog.viewmodels.DrinkIngredientViewModel
 import com.example.cocktailcatalog.viewmodels.DrinkViewModel
 import com.example.cocktailcatalog.viewmodels.IngredientViewModel
 import kotlinx.android.synthetic.main.fragment_add_drink_details.*
 import kotlinx.android.synthetic.main.fragment_search_drink.*
+import kotlinx.coroutines.launch
 
 private const val ARG_FIRST_PAGE_DATA = "firstPageData"
 
@@ -26,6 +29,8 @@ class AddDrinkDetailsFragment : Fragment() {
 
     private lateinit var drinkViewModel:DrinkViewModel
     private lateinit var ingredientViewModel: IngredientViewModel
+    private lateinit var drinkIngredientViewModel: DrinkIngredientViewModel
+
 
     private lateinit var ingredientMeasureAdapter: IngredientMeasureAdapter
     private lateinit var viewManager: RecyclerView.LayoutManager
@@ -42,6 +47,7 @@ class AddDrinkDetailsFragment : Fragment() {
 
         drinkViewModel = ViewModelProvider(requireActivity()).get(DrinkViewModel::class.java)
         ingredientViewModel = ViewModelProvider(requireActivity()).get(IngredientViewModel::class.java)
+        drinkIngredientViewModel = ViewModelProvider(requireActivity()).get(DrinkIngredientViewModel::class.java)
 
         ingredientMeasureAdapter = IngredientMeasureAdapter(firstPageData.ingredients)
         viewManager = LinearLayoutManager(requireContext())
@@ -65,36 +71,26 @@ class AddDrinkDetailsFragment : Fragment() {
                 editTextNewDrinkInstructions.error = "Instrutions can't be empty!"
             }// TODO: walidacja na miary
             else {
-                // add drink to database
-                drinkViewModel.addDrinkToLocalDatabase(
-                    firstPageData.name,
-                    "test",
-                    instructions.toString(),
-                    "test",
-                    "test",
-                    "test"
-                )
-
-                // TODO: add ingredients to db
-                for (ingredient in ingredientMeasureAdapter.ingredients){
-                    ingredientViewModel.addIngredientToLocalDatabase(
-                        ingredient.name,
-                        ingredient.measure
+                lifecycleScope.launch{
+                    val drinkId = drinkViewModel.addDrinkToLocalDatabase(
+                        firstPageData.name, "test", instructions.toString(),
+                        "test", "test", "test"
                     )
-                }
-                // TODO: add relations to db
 
+                    for (ingredient in ingredientMeasureAdapter.ingredients){
+                        val ingredientId = ingredientViewModel.addIngredientToLocalDatabase(
+                            ingredient.name, ingredient.measure)
+
+                        drinkIngredientViewModel.add(
+                            drinkId,
+                            ingredientId
+                        )
+                    }
+                }
 
                 // TODO: later maybe it should navigate to view of this drink
                 view.findNavController()
                     .navigate(R.id.action_addDrinkDetailsFragment_to_addDrinkFragment)
-
-                // testowo..
-                Log.d("test", firstPageData.name)
-                Log.d("test", "ingredient list from adapter: ")
-                for (x in ingredientMeasureAdapter.ingredients) {
-                    Log.d("test", x.name + ", measure: " + x.measure)
-                }
             }
         }
     }

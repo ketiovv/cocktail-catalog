@@ -24,6 +24,6 @@ import androidx.room.PrimaryKey
 )
 data class DrinkIngredient(
         @PrimaryKey(autoGenerate = true)
-        var id: Int,
-        var drink_id:Int,
-        var ingredient_id:Int)
+        var id: Long,
+        var drink_id:Long,
+        var ingredient_id:Long)

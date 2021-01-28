@@ -2,10 +2,7 @@ package com.example.cocktailcatalog.viewmodels
 
 import android.app.Application
 import android.util.Log
-import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.example.cocktailcatalog.api.Deserializers.IngredientsNamesListDeserializer
 
 import com.example.cocktailcatalog.api.ApiRoutes
@@ -17,6 +14,7 @@ import com.example.cocktailcatalog.models.repositories.IngredientRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import retrofit2.Retrofit
 import retrofit2.awaitResponse
 
@@ -26,15 +24,12 @@ class IngredientViewModel(application: Application) : AndroidViewModel(applicati
     private val ingredientRepository = IngredientRepository(AppDatabase.getDatabase(application).ingredientDao())
 
     // DB METHODS
-    fun addIngredientToLocalDatabase(name: String, measure: String){
+    suspend fun addIngredientToLocalDatabase(name: String, measure: String): Long = withContext(Dispatchers.IO){
         val ingredient = Ingredient(0, name, measure)
-        viewModelScope.launch {
-            ingredientRepository.add(ingredient)
-        }
+        return@withContext ingredientRepository.add(ingredient)
     }
 
     // API METHODS
-
     fun getIngredientNameList(){
         GlobalScope.launch(Dispatchers.IO) {
 

@@ -4,7 +4,6 @@ import android.app.Application
 import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.viewModelScope
 import com.example.cocktailcatalog.api.ApiRoutes
 import com.example.cocktailcatalog.api.Deserializers.DrinkByIdDeserializer
 import com.example.cocktailcatalog.api.Deserializers.DrinkListByIngrediendDeserializer
@@ -19,6 +18,7 @@ import com.example.cocktailcatalog.models.repositories.DrinkRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import retrofit2.Retrofit
 import retrofit2.awaitResponse
 
@@ -27,32 +27,22 @@ class DrinkViewModel(application: Application) : AndroidViewModel(application) {
 
     private val drinkRepository = DrinkRepository(AppDatabase.getDatabase(application).drinkDao())
 
-    // DB METHODS
 
-    fun addDrinkToLocalDatabase(
+    // DB METHODS
+    suspend fun addDrinkToLocalDatabase(
             name: String,
             category: String,
             instructions: String,
             imgUrl: String,
             glassType: String,
-            alcoholic: String, ){
-        val drink = LocalDrink(
-                0,
-                name,
-                category,
-                instructions,
-                imgUrl,
-                glassType,
-                alcoholic
-        )
+            alcoholic: String,
+        ): Long = withContext(Dispatchers.IO){
 
-        viewModelScope.launch {
-            drinkRepository.add(drink)
-        }
+        val drink = LocalDrink(0, name, category, instructions, imgUrl, glassType, alcoholic)
+        return@withContext drinkRepository.add(drink)
     }
 
     // API METHODS
-
     fun getDrinksByName(name: String){
 
         val api = Retrofit.Builder().baseUrl(ApiRoutes.BASE_URL)

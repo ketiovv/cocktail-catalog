@@ -5,5 +5,5 @@ import com.example.cocktailcatalog.models.entities.Drink
 import com.example.cocktailcatalog.models.entities.LocalDrink
 
 class DrinkRepository(private val drinkDao: DrinkDao) {
-    suspend fun add(drink: LocalDrink) = drinkDao.insert(drink)
+    suspend fun add(drink: LocalDrink): Long = drinkDao.insert(drink)
 }

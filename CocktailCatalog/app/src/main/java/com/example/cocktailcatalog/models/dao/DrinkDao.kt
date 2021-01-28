@@ -8,5 +8,5 @@ import com.example.cocktailcatalog.models.entities.LocalDrink
 @Dao
 interface DrinkDao {
     @Insert
-    suspend fun insert(drink: LocalDrink)
+    suspend fun insert(drink: LocalDrink):Long
 }
