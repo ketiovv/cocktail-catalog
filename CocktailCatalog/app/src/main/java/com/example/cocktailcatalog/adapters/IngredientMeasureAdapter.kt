@@ -31,7 +31,7 @@ class IngredientMeasureAdapter(var ingredients: ArrayList<Ingredient>):RecyclerV
         if (spinner != null) {
             val adapter = ArrayAdapter(
                 holder.itemView.context,
-                android.R.layout.simple_spinner_item, arrayOf("ml", "xd")
+                android.R.layout.simple_spinner_item, arrayOf("ml", "g", "spoon")
             )
             spinner.adapter = adapter
         }
