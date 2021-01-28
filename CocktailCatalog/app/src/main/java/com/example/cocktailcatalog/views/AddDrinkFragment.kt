@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.cocktailcatalog.R
@@ -14,7 +15,6 @@ import com.example.cocktailcatalog.adapters.IngredientListAdapter
 import com.example.cocktailcatalog.viewmodels.DrinkViewModel
 import com.example.cocktailcatalog.viewmodels.IngredientViewModel
 import kotlinx.android.synthetic.main.fragment_add_drink.*
-import kotlinx.android.synthetic.main.fragment_search_by_ingredient.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -77,10 +77,10 @@ class AddDrinkFragment : Fragment() {
 
         val selected = ingredientListAdapter.selectedIngredient
 
-        val name = editTextNewDrinkName.text;
+        val name = editTextNewDrinkDescription.text;
         buttonAddDrinkToLocalDatabase.setOnClickListener {
             if (name.toString().isNullOrBlank()){
-                editTextNewDrinkName.error = "Name can't be empty!"
+                editTextNewDrinkDescription.error = "Name can't be empty!"
             }//TODO: jakaś walidacja, typu selected.count >= 1
             else{
                 // TODO: zamiast tego co się tu odpierdala bezpośrednio - przekazujemy to bundlem
@@ -96,6 +96,8 @@ class AddDrinkFragment : Fragment() {
                 for (x in selected){
                     Log.d("test", x)
                 }
+
+                view.findNavController().navigate(R.id.action_addDrinkFragment_to_addDrinkDetailsFragment)
             }
 
         }
