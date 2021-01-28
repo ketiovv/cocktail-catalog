@@ -94,9 +94,9 @@ class FavCollectionAdapter(fragment: Fragment) : FragmentStateAdapter(fragment) 
         var fragment = Fragment()
 
         if(position == 0)
-            fragment = SearchByNameFragment.newInstance()
+            fragment = FavouriteFavouriteDrinksFragment.newInstance()
         else
-            fragment = SearchByIngredientFragment.newInstance()
+            fragment = FavouriteOwnDrinksFragment.newInstance()
 
         return fragment
     }
