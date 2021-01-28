@@ -35,7 +35,6 @@ class IngredientMeasureAdapter(var ingredients: ArrayList<Ingredient>):RecyclerV
             )
             spinner.adapter = adapter
         }
-        // TODO: NOT WORK XD
         spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
             override fun onItemSelected(
                 parent: AdapterView<*>?,

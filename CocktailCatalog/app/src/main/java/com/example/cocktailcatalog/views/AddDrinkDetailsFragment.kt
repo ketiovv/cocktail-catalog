@@ -15,6 +15,7 @@ import com.example.cocktailcatalog.R
 import com.example.cocktailcatalog.adapters.IngredientMeasureAdapter
 import com.example.cocktailcatalog.models.entities.LocalDrinkNameAndIngredients
 import com.example.cocktailcatalog.viewmodels.DrinkViewModel
+import com.example.cocktailcatalog.viewmodels.IngredientViewModel
 import kotlinx.android.synthetic.main.fragment_add_drink_details.*
 import kotlinx.android.synthetic.main.fragment_search_drink.*
 
@@ -24,6 +25,7 @@ class AddDrinkDetailsFragment : Fragment() {
     private lateinit var firstPageData :LocalDrinkNameAndIngredients
 
     private lateinit var drinkViewModel:DrinkViewModel
+    private lateinit var ingredientViewModel: IngredientViewModel
 
     private lateinit var ingredientMeasureAdapter: IngredientMeasureAdapter
     private lateinit var viewManager: RecyclerView.LayoutManager
@@ -39,6 +41,8 @@ class AddDrinkDetailsFragment : Fragment() {
                               savedInstanceState: Bundle?): View? {
 
         drinkViewModel = ViewModelProvider(requireActivity()).get(DrinkViewModel::class.java)
+        ingredientViewModel = ViewModelProvider(requireActivity()).get(IngredientViewModel::class.java)
+
         ingredientMeasureAdapter = IngredientMeasureAdapter(firstPageData.ingredients)
         viewManager = LinearLayoutManager(requireContext())
 
@@ -72,8 +76,14 @@ class AddDrinkDetailsFragment : Fragment() {
                 )
 
                 // TODO: add ingredients to db
-
+                for (ingredient in ingredientMeasureAdapter.ingredients){
+                    ingredientViewModel.addIngredientToLocalDatabase(
+                        ingredient.name,
+                        ingredient.measure
+                    )
+                }
                 // TODO: add relations to db
+
 
                 // TODO: later maybe it should navigate to view of this drink
                 view.findNavController()
