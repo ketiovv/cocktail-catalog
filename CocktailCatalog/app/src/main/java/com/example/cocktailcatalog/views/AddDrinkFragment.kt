@@ -34,7 +34,6 @@ class AddDrinkFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
 
-    private lateinit var drinkViewModel:DrinkViewModel
     private lateinit var ingredientViewModel: IngredientViewModel
 
     private lateinit var ingredientListAdapter: IngredientListAdapter
@@ -52,7 +51,6 @@ class AddDrinkFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        drinkViewModel = ViewModelProvider(requireActivity()).get(DrinkViewModel::class.java)
         ingredientViewModel = ViewModelProvider(requireActivity()).get(IngredientViewModel::class.java)
         ingredientViewModel.getIngredientNameList()
 
@@ -81,19 +79,11 @@ class AddDrinkFragment : Fragment() {
 
 
         val name = editTextNewDrinkDescription.text;
-        buttonAddDrinkToLocalDatabase.setOnClickListener {
+        buttonMoveToNextPage.setOnClickListener {
             if (name.toString().isNullOrBlank()){
                 editTextNewDrinkDescription.error = "Name can't be empty!"
             }//TODO: jakaś walidacja, typu selected.count >= 1
             else{
-//                drinkViewModel.addDrinkToLocalDatabase(
-//                        name.toString(),
-//                        "test",
-//                        "test",
-//                        "test",
-//                        "test",
-//                        "test")
-
                 val selectedIngredients = ArrayList<Ingredient>()
                 for (x in ingredientListAdapter.selectedIngredient){
                     selectedIngredients.add(Ingredient(0,x,""))
@@ -104,7 +94,6 @@ class AddDrinkFragment : Fragment() {
                     bundleOf("firstPageData" to firstPageData)
                 )
             }
-
         }
     }
 
