@@ -6,12 +6,15 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.cocktailcatalog.R
 import com.example.cocktailcatalog.adapters.IngredientListAdapter
+import com.example.cocktailcatalog.models.entities.Ingredient
+import com.example.cocktailcatalog.models.entities.LocalDrinkNameAndIngredients
 import com.example.cocktailcatalog.viewmodels.DrinkViewModel
 import com.example.cocktailcatalog.viewmodels.IngredientViewModel
 import kotlinx.android.synthetic.main.fragment_add_drink.*
@@ -75,7 +78,7 @@ class AddDrinkFragment : Fragment() {
             layoutManager = viewManager
         }
 
-        val selected = ingredientListAdapter.selectedIngredient
+
 
         val name = editTextNewDrinkDescription.text;
         buttonAddDrinkToLocalDatabase.setOnClickListener {
@@ -83,21 +86,23 @@ class AddDrinkFragment : Fragment() {
                 editTextNewDrinkDescription.error = "Name can't be empty!"
             }//TODO: jakaś walidacja, typu selected.count >= 1
             else{
-                // TODO: zamiast tego co się tu odpierdala bezpośrednio - przekazujemy to bundlem
-                // TODO: do nastepnego fragmentu, ktory już ma pełne prawo to odpierdalać
-                // TODO: gdyż tam podamy wszelkie pozostałe dane
-                drinkViewModel.addDrinkToLocalDatabase(
-                        name.toString(),
-                        "test",
-                        "test",
-                        "test",
-                        "test",
-                        "test")
-                for (x in selected){
-                    Log.d("test", x)
-                }
+//                drinkViewModel.addDrinkToLocalDatabase(
+//                        name.toString(),
+//                        "test",
+//                        "test",
+//                        "test",
+//                        "test",
+//                        "test")
 
-                view.findNavController().navigate(R.id.action_addDrinkFragment_to_addDrinkDetailsFragment)
+                val selectedIngredients = ArrayList<Ingredient>()
+                for (x in ingredientListAdapter.selectedIngredient){
+                    selectedIngredients.add(Ingredient(0,x,""))
+                }
+                val firstPageData = LocalDrinkNameAndIngredients(name.toString(), selectedIngredients)
+                view.findNavController().navigate(
+                    R.id.action_addDrinkFragment_to_addDrinkDetailsFragment,
+                    bundleOf("firstPageData" to firstPageData)
+                )
             }
 
         }
