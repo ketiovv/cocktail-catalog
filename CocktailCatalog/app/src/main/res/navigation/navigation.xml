@@ -60,5 +60,9 @@
     <fragment
         android:id="@+id/addDrinkDetailsFragment"
         android:name="com.example.cocktailcatalog.views.AddDrinkDetailsFragment"
-        android:label="AddDrinkDetailsFragment" />
+        android:label="AddDrinkDetailsFragment" >
+        <action
+            android:id="@+id/action_addDrinkDetailsFragment_to_addDrinkFragment"
+            app:destination="@id/addDrinkFragment" />
+    </fragment>
 </navigation>
