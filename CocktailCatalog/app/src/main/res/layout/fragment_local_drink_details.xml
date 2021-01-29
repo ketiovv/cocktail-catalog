@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="views.LocalDrinkDetailsFragment"
+    android:fillViewport="true"
+    android:background="#3F403D">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/frameLayout3F"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="15dp">
+
+
+        <ImageButton
+            android:id="@+id/buttonBackF"
+            android:layout_width="35dp"
+            android:layout_height="41dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="10dp"
+            android:backgroundTint="#00FFFFFF"
+            android:src="@drawable/ic_baseline_arrow_back_24"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textViewDrinkNameDF"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/nunito"
+            android:text="TextView"
+            android:textColor="#FFFFFF"
+            android:textSize="27sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/buttonBackF"
+            app:layout_constraintTop_toBottomOf="@+id/buttonBackF" />
+
+        <ImageButton
+            android:id="@+id/buttonAddToFavoritesF"
+            android:layout_width="28dp"
+            android:layout_height="25dp"
+            android:layout_marginTop="15dp"
+            android:backgroundTint="#00FFFFFF"
+            android:src="@drawable/ic_baseline_favorite_border_24_kici"
+            app:layout_constraintStart_toStartOf="@+id/textViewDrinkNameDF"
+            app:layout_constraintTop_toBottomOf="@+id/textViewDrinkNameDF" />
+
+        <TextView
+            android:id="@+id/textViewAddToFavoritesF"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="4dp"
+            android:fontFamily="@font/nunito_extralight"
+            android:text="@string/add_to_favorite"
+            android:textColor="#FFFFFF"
+            app:layout_constraintStart_toEndOf="@+id/buttonAddToFavoritesF"
+            app:layout_constraintTop_toTopOf="@+id/buttonAddToFavoritesF" />
+
+        <TextView
+            android:id="@+id/textView4F"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:fontFamily="@font/nunito"
+            android:text="@string/ingredients"
+            android:textColor="#FFFFFF"
+            android:textSize="26sp"
+            app:layout_constraintStart_toStartOf="@+id/imageViewF"
+            app:layout_constraintTop_toBottomOf="@+id/imageViewF" />
+
+        <TextView
+            android:id="@+id/textViewIngredientsListF"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/nunito"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="@+id/textView4F"
+            app:layout_constraintTop_toBottomOf="@+id/textView4F" />
+
+        <ImageView
+            android:id="@+id/imageViewF"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:src="@drawable/ic_launcher_background"
+            app:layout_constraintStart_toStartOf="@+id/buttonAddToFavoritesF"
+            app:layout_constraintTop_toBottomOf="@+id/textViewAddToFavoritesF" />
+
+        <TextView
+            android:id="@+id/textViewInstructionsF"
+            android:layout_width="375dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:fontFamily="@font/nunito"
+            android:text="TextView"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/textViewIngredientsListF"
+            app:layout_constraintTop_toBottomOf="@+id/textViewIngredientsListF" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.core.widget.NestedScrollView>
