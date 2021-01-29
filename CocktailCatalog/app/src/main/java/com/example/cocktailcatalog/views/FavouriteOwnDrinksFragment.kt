@@ -14,12 +14,15 @@ import com.example.cocktailcatalog.R
 import com.example.cocktailcatalog.adapters.DrinkListAdapter
 import com.example.cocktailcatalog.adapters.LocalDrinkListAdapter
 import com.example.cocktailcatalog.viewmodels.DrinkViewModel
+import com.example.cocktailcatalog.viewmodels.IngredientViewModel
 import kotlinx.android.synthetic.main.fragment_favourite_own_drinks.*
 import kotlinx.android.synthetic.main.fragment_search_drink.*
 import kotlinx.android.synthetic.main.fragment_search_drink.recyclerViewDrinkListSearch
 
 class FavouriteOwnDrinksFragment : Fragment() {
     private lateinit var drinkViewModel: DrinkViewModel
+    private lateinit var ingredientViewModel: IngredientViewModel
+
     private lateinit var drinkListAdapter: LocalDrinkListAdapter
     private lateinit var viewManager: RecyclerView.LayoutManager
 
@@ -28,9 +31,11 @@ class FavouriteOwnDrinksFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         drinkViewModel = ViewModelProvider(requireActivity()).get(DrinkViewModel::class.java)
+        ingredientViewModel = ViewModelProvider(requireActivity()).get(IngredientViewModel::class.java)
 
         drinkListAdapter = LocalDrinkListAdapter( drinkViewModel.allLocalDrinks){
             DrinkViewModel.selectedLocalDrink = it
+            ingredientViewModel.drinkId.value = it.id
             view?.findNavController()?.navigate(R.id.action_favoriteDrinksFragment_to_localDrinkDetailsFragment)
         }
 
