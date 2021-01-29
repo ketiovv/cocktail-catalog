@@ -27,7 +27,7 @@ class DrinkViewModel(application: Application) : AndroidViewModel(application) {
     var listOfDrinks = MutableLiveData<DrinkList>()
 
     private val drinkRepository = DrinkRepository(AppDatabase.getDatabase(application).drinkDao())
-    private val allLocalDrinks = drinkRepository.allDrinks
+    val allLocalDrinks = drinkRepository.allDrinks
 
     // DB METHODS
     suspend fun addDrinkToLocalDatabase(
