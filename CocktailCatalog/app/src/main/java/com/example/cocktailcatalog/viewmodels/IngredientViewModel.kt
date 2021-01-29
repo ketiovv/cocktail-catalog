@@ -23,6 +23,23 @@ class IngredientViewModel(application: Application) : AndroidViewModel(applicati
 
     private val ingredientRepository = IngredientRepository(AppDatabase.getDatabase(application).ingredientDao())
 
+    val drinkId = MutableLiveData<Int>()
+    val drinkIngredients: LiveData<List<Ingredient>>
+
+    init {
+        drinkId.value = 0
+
+        drinkIngredients = Transformations.switchMap(drinkId){
+            if (it == 0){
+                return@switchMap ingredientRepository.allIngredients
+            }
+            else{
+                return@switchMap ingredientRepository.getIngredientsInDrink(it)
+            }
+        }
+    }
+
+
     // DB METHODS
     suspend fun addIngredientToLocalDatabase(name: String, measure: String): Long = withContext(Dispatchers.IO){
         val ingredient = Ingredient(0, name, measure)
