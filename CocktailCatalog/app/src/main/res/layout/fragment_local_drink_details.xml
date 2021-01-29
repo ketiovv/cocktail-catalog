@@ -40,28 +40,6 @@
             app:layout_constraintStart_toStartOf="@+id/buttonBackF"
             app:layout_constraintTop_toBottomOf="@+id/buttonBackF" />
 
-        <ImageButton
-            android:id="@+id/buttonAddToFavoritesF"
-            android:layout_width="28dp"
-            android:layout_height="25dp"
-            android:layout_marginTop="15dp"
-            android:backgroundTint="#00FFFFFF"
-            android:src="@drawable/ic_baseline_favorite_border_24_kici"
-            app:layout_constraintStart_toStartOf="@+id/textViewDrinkNameDF"
-            app:layout_constraintTop_toBottomOf="@+id/textViewDrinkNameDF" />
-
-        <TextView
-            android:id="@+id/textViewAddToFavoritesF"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
-            android:layout_marginTop="4dp"
-            android:fontFamily="@font/nunito_extralight"
-            android:text="@string/add_to_favorite"
-            android:textColor="#FFFFFF"
-            app:layout_constraintStart_toEndOf="@+id/buttonAddToFavoritesF"
-            app:layout_constraintTop_toTopOf="@+id/buttonAddToFavoritesF" />
-
         <TextView
             android:id="@+id/textView4F"
             android:layout_width="wrap_content"
@@ -91,8 +69,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
             android:src="@drawable/ic_launcher_background"
-            app:layout_constraintStart_toStartOf="@+id/buttonAddToFavoritesF"
-            app:layout_constraintTop_toBottomOf="@+id/textViewAddToFavoritesF" />
+            app:layout_constraintStart_toStartOf="@+id/textViewDrinkNameDF"
+            app:layout_constraintTop_toBottomOf="@+id/textViewDrinkNameDF" />
 
         <TextView
             android:id="@+id/textViewInstructionsF"
