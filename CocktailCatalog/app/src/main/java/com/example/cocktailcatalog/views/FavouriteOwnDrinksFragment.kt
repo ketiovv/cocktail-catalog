@@ -30,7 +30,7 @@ class FavouriteOwnDrinksFragment : Fragment() {
         drinkViewModel = ViewModelProvider(requireActivity()).get(DrinkViewModel::class.java)
 
         drinkListAdapter = LocalDrinkListAdapter( drinkViewModel.allLocalDrinks){
-            Log.d("test", it.name)
+            DrinkViewModel.selectedLocalDrink = it
             view?.findNavController()?.navigate(R.id.action_favoriteDrinksFragment_to_localDrinkDetailsFragment)
         }
 
