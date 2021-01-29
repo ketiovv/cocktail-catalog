@@ -31,7 +31,7 @@ class FavouriteOwnDrinksFragment : Fragment() {
 
         drinkListAdapter = LocalDrinkListAdapter( drinkViewModel.allLocalDrinks){
             Log.d("test", it.name)
-            //view?.findNavController()?.navigate(R.id.action_searchFragment_to_drinkDetailsFragment)
+            view?.findNavController()?.navigate(R.id.action_favoriteDrinksFragment_to_localDrinkDetailsFragment)
         }
 
         viewManager = LinearLayoutManager(requireContext())

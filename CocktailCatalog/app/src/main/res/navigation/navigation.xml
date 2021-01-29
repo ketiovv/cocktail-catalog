@@ -33,7 +33,11 @@
     <fragment
         android:id="@+id/favoriteDrinksFragment"
         android:name="com.example.cocktailcatalog.views.FavoriteDrinksFragment"
-        android:label="FavoriteDrinksFragment" />
+        android:label="FavoriteDrinksFragment" >
+        <action
+            android:id="@+id/action_favoriteDrinksFragment_to_localDrinkDetailsFragment"
+            app:destination="@id/localDrinkDetailsFragment" />
+    </fragment>
     <fragment
         android:id="@+id/drinkDetailsFragment"
         android:name="com.example.cocktailcatalog.views.DrinkDetailsFragment"
@@ -65,4 +69,8 @@
             android:id="@+id/action_addDrinkDetailsFragment_to_addDrinkFragment"
             app:destination="@id/addDrinkFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/localDrinkDetailsFragment"
+        android:name="com.example.cocktailcatalog.views.LocalDrinkDetailsFragment"
+        android:label="LocalDrinkDetailsFragment" />
 </navigation>
