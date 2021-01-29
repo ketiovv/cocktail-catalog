@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
 import com.example.cocktailcatalog.R
 import com.example.cocktailcatalog.models.entities.Ingredient
 import com.example.cocktailcatalog.viewmodels.DrinkViewModel
@@ -54,8 +55,7 @@ class LocalDrinkDetailsFragment : Fragment() {
     private fun updateIngredients(list: List<Ingredient>) {
         textViewIngredientsListF.text = ""
         for (ingredient in list){
-            Log.d("test", ingredient.name)
-            textViewIngredientsListF.text = textViewIngredientsListF.text.toString() + "${ingredient.measure} ${ingredient.name} \n"
+            textViewIngredientsListF.text = textViewIngredientsListF.text.toString() + "${ingredient.name} ${ingredient.measure}\n"
         }
     }
 
@@ -73,9 +73,10 @@ class LocalDrinkDetailsFragment : Fragment() {
                 .centerCrop()
                 .into(imageViewF)
         }
-        //TODO: dam musisz dodać do tego picassa żeby jak nie ma linku to imageview.visibility  = View.gone
 
-
+        buttonBackF.setOnClickListener {
+            it.findNavController().navigate(R.id.action_localDrinkDetailsFragment_to_favoriteDrinksFragment)
+        }
     }
 
     companion object {

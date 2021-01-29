@@ -72,5 +72,9 @@
     <fragment
         android:id="@+id/localDrinkDetailsFragment"
         android:name="com.example.cocktailcatalog.views.LocalDrinkDetailsFragment"
-        android:label="LocalDrinkDetailsFragment" />
+        android:label="LocalDrinkDetailsFragment" >
+        <action
+            android:id="@+id/action_localDrinkDetailsFragment_to_favoriteDrinksFragment"
+            app:destination="@id/favoriteDrinksFragment" />
+    </fragment>
 </navigation>
