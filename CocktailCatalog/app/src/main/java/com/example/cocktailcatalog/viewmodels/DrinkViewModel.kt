@@ -123,5 +123,6 @@ class DrinkViewModel(application: Application) : AndroidViewModel(application) {
 
     companion object{
         lateinit var selectedDrink: Drink
+        lateinit var selectedLocalDrink: LocalDrink
     }
 }
