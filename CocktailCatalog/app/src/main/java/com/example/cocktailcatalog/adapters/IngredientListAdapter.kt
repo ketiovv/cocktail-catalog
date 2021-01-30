@@ -51,6 +51,9 @@ class IngredientListAdapter(var ingredients: MutableLiveData<IngredientNamesList
     override fun getItemCount(): Int {
         return ingredients.value?.size?:0
     }
+    fun getSelectedItemsCount(): Int {
+        return selectedIngredient.size
+    }
 
 //    override fun getFilter(): Filter {
 //        return object : Filter() {

@@ -77,7 +77,6 @@ class AddDrinkDetailsFragment : Fragment() {
                     }
                 }
 
-                // TODO: later maybe it should navigate to view of this drink
                 view.findNavController()
                     .navigate(R.id.action_addDrinkDetailsFragment_to_addDrinkFragment)
             }
