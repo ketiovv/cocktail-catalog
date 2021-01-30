@@ -86,7 +86,7 @@ class AddDrinkFragment : Fragment() {
             else{
                 val selectedIngredients = ArrayList<Ingredient>()
                 for (x in ingredientListAdapter.selectedIngredient){
-                    selectedIngredients.add(Ingredient(0,x,""))
+                    selectedIngredients.add(Ingredient(0,x,"",0))
                 }
                 val firstPageData = LocalDrinkNameAndIngredients(name.toString(), selectedIngredients)
                 view.findNavController().navigate(

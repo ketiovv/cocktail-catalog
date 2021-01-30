@@ -12,7 +12,7 @@ interface IngredientDao {
     @Query("SELECT * FROM ingredient_table")
     fun getAll(): LiveData<List<Ingredient>>
 
-    @Query("SELECT * FROM ingredient_table INNER JOIN drink_ingredient_table ON ingredient_table.id = drink_ingredient_table.ingredient_id WHERE drink_ingredient_table.drink_id = :drink_id")
+    @Query("SELECT * FROM ingredient_table WHERE ingredient_table.drink_id = :drink_id")
     fun getByDrinkId(drink_id:Int): LiveData<List<Ingredient>>
 
     @Insert

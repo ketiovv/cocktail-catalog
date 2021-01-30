@@ -41,8 +41,8 @@ class IngredientViewModel(application: Application) : AndroidViewModel(applicati
 
 
     // DB METHODS
-    suspend fun addIngredientToLocalDatabase(name: String, measure: String): Long = withContext(Dispatchers.IO){
-        val ingredient = Ingredient(0, name, measure)
+    suspend fun addIngredientToLocalDatabase(name: String, measure: String, drinkId: Long): Long = withContext(Dispatchers.IO){
+        val ingredient = Ingredient(0, name, measure, drinkId)
         return@withContext ingredientRepository.add(ingredient)
     }
 

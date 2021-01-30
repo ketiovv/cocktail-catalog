@@ -46,7 +46,7 @@ class DrinkByIdDeserializer: JsonDeserializer<Drink> {
                         var m:String
 
                         m = gson.fromJson(jsonMeasure, String::class.java) ?: "Some"
-                        ingredientList.add(Ingredient(0,ingredient,m))
+                        ingredientList.add(Ingredient(0,ingredient,m,0))
                     }
                     else break
                 }

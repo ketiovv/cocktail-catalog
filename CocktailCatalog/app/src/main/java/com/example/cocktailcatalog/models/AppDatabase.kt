@@ -5,23 +5,18 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.example.cocktailcatalog.models.dao.DrinkDao
-import com.example.cocktailcatalog.models.dao.DrinkIngredientDao
 import com.example.cocktailcatalog.models.dao.IngredientDao
-import com.example.cocktailcatalog.models.entities.Drink
-import com.example.cocktailcatalog.models.entities.DrinkIngredient
 import com.example.cocktailcatalog.models.entities.Ingredient
 import com.example.cocktailcatalog.models.entities.LocalDrink
 
 @Database(
     entities = [LocalDrink::class,
-                DrinkIngredient::class,
                 Ingredient::class],
     version = 1,
     exportSchema = false
 )
 abstract class AppDatabase:RoomDatabase() {
     abstract fun drinkDao(): DrinkDao
-    abstract fun drinkIngredientDao(): DrinkIngredientDao
     abstract fun ingredientDao(): IngredientDao
 
     companion object{
