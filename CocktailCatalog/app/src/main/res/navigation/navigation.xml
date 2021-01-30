@@ -6,12 +6,12 @@
 
     <fragment
         android:id="@+id/drinkHistoryFragment"
-        android:name="com.example.cocktailcatalog.View.DrinkHistoryFragment"
+        android:name="com.example.cocktailcatalog.views.DrinkHistoryFragment"
         android:label="drink_history_fragment"
         tools:layout="@layout/drink_history_fragment" />
     <fragment
         android:id="@+id/searchFragment"
-        android:name="com.example.cocktailcatalog.View.SearchFragment"
+        android:name="com.example.cocktailcatalog.views.SearchFragment"
         android:label="fragment_search"
         tools:layout="@layout/fragment_search" >
         <action
@@ -23,15 +23,23 @@
     </fragment>
     <fragment
         android:id="@+id/addDrinkFragment"
-        android:name="com.example.cocktailcatalog.View.AddDrinkFragment"
-        android:label="AddDrinkFragment" />
+        android:name="com.example.cocktailcatalog.views.AddDrinkFragment"
+        android:label="AddDrinkFragment" >
+        <action
+            android:id="@+id/action_addDrinkFragment_to_addDrinkDetailsFragment"
+            app:destination="@id/addDrinkDetailsFragment" />
+    </fragment>
     <fragment
         android:id="@+id/favoriteDrinksFragment"
-        android:name="com.example.cocktailcatalog.View.FavoriteDrinksFragment"
-        android:label="FavoriteDrinksFragment" />
+        android:name="com.example.cocktailcatalog.views.FavoriteDrinksFragment"
+        android:label="FavoriteDrinksFragment" >
+        <action
+            android:id="@+id/action_favoriteDrinksFragment_to_localDrinkDetailsFragment"
+            app:destination="@id/localDrinkDetailsFragment" />
+    </fragment>
     <fragment
         android:id="@+id/drinkDetailsFragment"
-        android:name="com.example.cocktailcatalog.View.DrinkDetailsFragment"
+        android:name="com.example.cocktailcatalog.views.DrinkDetailsFragment"
         android:label="DrinkDetailsFragment" >
         <action
             android:id="@+id/action_drinkDetailsFragment_to_searchFragment"
@@ -42,7 +50,7 @@
     </fragment>
     <fragment
         android:id="@+id/searchResultsFragment"
-        android:name="com.example.cocktailcatalog.View.SearchResultsFragment"
+        android:name="com.example.cocktailcatalog.views.SearchResultsFragment"
         android:label="fragment_search_results"
         tools:layout="@layout/fragment_search_results" >
         <action
@@ -51,5 +59,21 @@
         <action
             android:id="@+id/action_searchResultsFragment_to_drinkDetailsFragment"
             app:destination="@id/drinkDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addDrinkDetailsFragment"
+        android:name="com.example.cocktailcatalog.views.AddDrinkDetailsFragment"
+        android:label="AddDrinkDetailsFragment" >
+        <action
+            android:id="@+id/action_addDrinkDetailsFragment_to_addDrinkFragment"
+            app:destination="@id/addDrinkFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/localDrinkDetailsFragment"
+        android:name="com.example.cocktailcatalog.views.LocalDrinkDetailsFragment"
+        android:label="LocalDrinkDetailsFragment" >
+        <action
+            android:id="@+id/action_localDrinkDetailsFragment_to_favoriteDrinksFragment"
+            app:destination="@id/favoriteDrinksFragment" />
     </fragment>
 </navigation>

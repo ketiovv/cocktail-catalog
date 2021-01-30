@@ -12,7 +12,7 @@
         android:roundIcon="@drawable/ic_skladnik"
         android:supportsRtl="true"
         android:theme="@style/Theme.CocktailCatalog">
-        <activity android:name=".View.MainActivity"
+        <activity android:name=".views.MainActivity"
             android:windowSoftInputMode="adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
