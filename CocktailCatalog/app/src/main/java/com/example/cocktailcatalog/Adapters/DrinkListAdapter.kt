@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.os.Bundle
+import android.widget.SectionIndexer
 import androidx.core.content.res.TypedArrayUtils.getString
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -21,8 +22,11 @@ import com.example.cocktailcatalog.ViewModel.DrinkViewModel
 import javax.security.auth.callback.Callback
 
 
-class DrinkListAdapter(var drinks: LiveData<DrinkList>, var clickCallback: ((d: Drink) -> Unit)) :RecyclerView.Adapter<DrinkListAdapter.Holder>(){
+class  DrinkListAdapter(var drinks: LiveData<DrinkList>, var clickCallback: ((d: Drink) -> Unit)) :RecyclerView.Adapter<DrinkListAdapter.Holder>(),
+    SectionIndexer {
     class Holder(view:View):RecyclerView.ViewHolder(view)
+
+    private lateinit var mSectionPositions: ArrayList<Int>
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
         val view = LayoutInflater.from(parent.context)
@@ -52,5 +56,35 @@ class DrinkListAdapter(var drinks: LiveData<DrinkList>, var clickCallback: ((d: 
         return drinks.value?.size?:0
     }
 
+    override fun getSections(): Array<String> {
+        var sections: MutableList<String> = ArrayList()
+        mSectionPositions = ArrayList()
+//        if(itemCount != 0){
+//            var i = 0
+//            val size = itemCount
+//            while (i < size) {
+//                val section = drinks.value?.get(i)?.name?.get(0).toString().toUpperCase()
+//                if (!sections.contains(section)) {
+//                    sections.add(section)
+//                    mSectionPositions.add(i)
+//                }
+//                i++
+//            }
+//        }
+//        else {
+//            "chuj"
+//            sections.add("A")
+//            mSectionPositions.add(0)
+//        }
+            return sections.toTypedArray()
+    }
+
+    override fun getPositionForSection(sectionIndex: Int): Int {
+        return mSectionPositions[sectionIndex];
+    }
+
+    override fun getSectionForPosition(position: Int): Int {
+        return 0;
+    }
 
 }

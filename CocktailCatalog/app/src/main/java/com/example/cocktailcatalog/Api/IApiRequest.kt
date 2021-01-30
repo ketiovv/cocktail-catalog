@@ -22,4 +22,7 @@ interface IApiRequest {
 
     @GET("lookup.php?")
     fun getDrinkById(@Query("i") id: String): Call<Drink>
+
+    @GET("search.php")
+    fun getDrinksByFirstLetter(@Query("f") letter:String): Call<DrinkList>
 }

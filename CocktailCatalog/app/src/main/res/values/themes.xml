@@ -5,8 +5,8 @@
         <item name="colorPrimary">#BEEF62</item>
         <item name="colorOnPrimary">#191A18</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/teal_200</item>
-        <item name="colorSecondaryVariant">@color/teal_700</item>
+        <item name="colorSecondary">@color/kivi</item>
+        <item name="colorSecondaryVariant">@color/kivi</item>
         <item name="colorOnSecondary">#3F403D</item>
         <!-- Status bar color. -->
         <item name="fontFamily">@font/nunito</item>

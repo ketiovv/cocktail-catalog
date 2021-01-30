@@ -21,24 +21,59 @@ import retrofit2.awaitResponse
 class DrinkViewModel : ViewModel() {
     var listOfDrinks = MutableLiveData<DrinkList>()
 
-    fun getDrinksByName(name: String){
+    var alphabet = arrayListOf<String>("A","B","C","D","E","F","G","H","I","J","K","L","M","N","O",
+            "P","Q","R","S","T","U","V","W","X","Y","Z","1","2","3","4","5","6","7","9","'")
 
+
+    fun getDrinksByName(name: String){
+        var tmpList = DrinkList()
+        val api = Retrofit.Builder().baseUrl(ApiRoutes.BASE_URL)
+                .addConverterFactory(ApiRoutes.bulidGsonConverter(DrinkList::class.java, DrinkListDeserializer())).build()
+                .create(IApiRequest::class.java)
+
+        GlobalScope.launch(Dispatchers.IO) {
+                val response  = api.getDrinksByName(name).awaitResponse()
+
+                if (response.isSuccessful){
+                    var data = response.body()
+                    if (data != null) {
+                          listOfDrinks.postValue(data)
+                    }
+                }
+                else{
+                    Log.d("api-connection","response failed")
+                }
+        }
+    }
+
+    fun getAllDrinks(){
+        var tmpList = DrinkList()
         val api = Retrofit.Builder().baseUrl(ApiRoutes.BASE_URL)
                 .addConverterFactory(ApiRoutes.bulidGsonConverter(DrinkList::class.java, DrinkListDeserializer())).build()
                 .create(IApiRequest::class.java)
 
         GlobalScope.launch(Dispatchers.IO) {
 
-            val response  = api.getDrinksByName(name).awaitResponse()
+            for (letter in alphabet){
+                val response  = api.getDrinksByFirstLetter(letter).awaitResponse()
 
-            if (response.isSuccessful){
-                var data = response.body()
-                listOfDrinks.postValue(data)
-                ///Log.d("myTag", listOfDrinks.value.toString())
+                if (response.isSuccessful){
+                    var data = response.body()
+                    if (data != null) {
+//                        if(letter == "A")
+//                            listOfDrinks.postValue(data)
+//                        else
+//                            listOfDrinks.postValue(data)
+                        tmpList.addAll(data)
+                    }
+
+                }
+                else{
+                    Log.d("api-connection","response failed")
+                }
             }
-            else{
-                Log.d("api-connection","response failed")
-            }
+            allDrinks.postValue(tmpList)
+            //Log.d("myTag",listOfDrinks.value.toString())
         }
     }
 
@@ -64,7 +99,6 @@ class DrinkViewModel : ViewModel() {
             if (response.isSuccessful){
                 var data = response.body()
                 listOfDrinks.postValue(data)
-                ///Log.d("myTag", listOfDrinks.value.toString())
             }
             else{
                 Log.d("api-connection","response failed")
@@ -100,5 +134,7 @@ class DrinkViewModel : ViewModel() {
 
     companion object{
         lateinit var selectedDrink: Drink
+
+        var allDrinks = MutableLiveData<DrinkList>()
     }
 }

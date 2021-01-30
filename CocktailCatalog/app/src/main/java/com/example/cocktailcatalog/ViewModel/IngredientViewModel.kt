@@ -16,6 +16,7 @@ import retrofit2.awaitResponse
 class IngredientViewModel : ViewModel() {
     var listOfIngredientNames = MutableLiveData<IngredientNamesList>()
 
+
     fun getIngredientNameList(){
         GlobalScope.launch(Dispatchers.IO) {
 

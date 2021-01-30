@@ -55,5 +55,6 @@ dependencies {
     implementation "com.squareup.retrofit2:converter-gson:$retrofit_ver"
 
     implementation 'com.squareup.picasso:picasso:2.71828'
+    implementation 'com.github.myinnos:AlphabetIndex-Fast-Scroll-RecyclerView:1.0.95'
 
 }

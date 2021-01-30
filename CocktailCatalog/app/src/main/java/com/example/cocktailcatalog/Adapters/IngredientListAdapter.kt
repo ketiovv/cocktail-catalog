@@ -1,18 +1,18 @@
 package com.example.cocktailcatalog.Adapters
 
 import android.annotation.SuppressLint
-import android.text.BoringLayout
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.*
-import androidx.lifecycle.LiveData
+import android.widget.CheckBox
+import android.widget.SectionIndexer
+import android.widget.TextView
 import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.RecyclerView
 import com.example.cocktailcatalog.Model.IngredientNamesList
 import com.example.cocktailcatalog.R
 import java.util.*
+import kotlin.collections.ArrayList
 
 
 class IngredientListAdapter(var ingredients: MutableLiveData<IngredientNamesList>) :RecyclerView.Adapter<IngredientListAdapter.Holder>(){
@@ -51,6 +51,12 @@ class IngredientListAdapter(var ingredients: MutableLiveData<IngredientNamesList
     override fun getItemCount(): Int {
         return ingredients.value?.size?:0
     }
+
+    override fun onBindViewHolder(holder: Holder, position: Int, payloads: MutableList<Any>) {
+        super.onBindViewHolder(holder, position, payloads)
+    }
+
+
 
 //    override fun getFilter(): Filter {
 //        return object : Filter() {
