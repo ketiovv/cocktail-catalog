@@ -6,12 +6,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="views.AddDrinkDetailsFragment">
 
+
     <TextView
-        android:id="@+id/textViewNewDrinkDescriptionLabel"
+        android:id="@+id/textViewNewDrinkInstructionLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="48dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="40dp"
         android:text="Instructions"
         android:textColor="#FFFFFF"
         android:textSize="18sp"
@@ -20,23 +21,45 @@
 
     <EditText
         android:id="@+id/editTextNewDrinkInstructions"
-        android:layout_width="245dp"
-        android:layout_height="89dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="16dp"
+        android:layout_width="247dp"
+        android:layout_height="59dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="24dp"
         android:ems="10"
         android:inputType="textMultiLine"
-        app:layout_constraintStart_toEndOf="@+id/textViewNewDrinkDescriptionLabel"
+        app:layout_constraintStart_toEndOf="@+id/textViewNewDrinkInstructionLabel"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="64dp"
+        android:text="Image URL"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="@+id/textViewNewDrinkInstructionLabel"
+        app:layout_constraintTop_toBottomOf="@+id/textViewNewDrinkInstructionLabel" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="48dp"
+        android:text="Alcoholic"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="@+id/textView2"
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewIngredientsMeasureEntering"
         android:layout_width="360dp"
         android:layout_height="241dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="196dp"
         android:overScrollMode="ifContentScrolls"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintHorizontal_bias="0.49"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextNewDrinkInstructions" />
 
@@ -49,5 +72,25 @@
         android:text="add drink"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/recyclerViewIngredientsMeasureEntering" />
+
+    <EditText
+        android:id="@+id/editTextImageURL"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="36dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        app:layout_constraintStart_toStartOf="@+id/editTextNewDrinkInstructions"
+        app:layout_constraintTop_toBottomOf="@+id/editTextNewDrinkInstructions" />
+
+    <Switch
+        android:id="@+id/switchAlcoholic"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="36dp"
+        android:checked="true"
+        app:layout_constraintStart_toStartOf="@+id/editTextImageURL"
+        app:layout_constraintTop_toBottomOf="@+id/editTextImageURL"
+        tools:ignore="UseSwitchCompatOrMaterialXml" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

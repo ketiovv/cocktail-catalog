@@ -33,14 +33,13 @@ class DrinkViewModel(application: Application) : AndroidViewModel(application) {
     // DB METHODS
     suspend fun addDrinkToLocalDatabase(
             name: String,
-            category: String,
             instructions: String,
             imgUrl: String,
-            glassType: String,
-            alcoholic: String,
+            alcoholic: Boolean,
         ): Long = withContext(Dispatchers.IO){
 
-        val drink = LocalDrink(0, name, category, instructions, imgUrl, glassType, alcoholic)
+        //val drink = LocalDrink(0, name, instructions, imgUrl, alcoholic)
+        val drink = LocalDrink(0,name,instructions,"https://cdn-lubimyczytac.pl/upload/authors/94156/793655-352x500.jpg",alcoholic)
         return@withContext drinkRepository.add(drink)
     }
 

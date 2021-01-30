@@ -11,9 +11,7 @@ data class LocalDrink(
         @PrimaryKey(autoGenerate = true)
         var id: Int,
         var name:String,
-        var category: String,
         var instructions: String,
         var image: String,
-        var glassType: String,
-        var alcoholic: String,
+        var alcoholic: Boolean,
 )

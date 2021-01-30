@@ -59,6 +59,8 @@ class AddDrinkDetailsFragment : Fragment() {
         }
 
         val instructions = editTextNewDrinkInstructions.text
+        val imageUrl = editTextImageURL.text
+        val alcoholic = switchAlcoholic.isChecked
 
         buttonAddDrinkToLocalDatabase.setOnClickListener {
             if (instructions.isNullOrBlank()){
@@ -67,9 +69,7 @@ class AddDrinkDetailsFragment : Fragment() {
             else {
                 lifecycleScope.launch{
                     val drinkId = drinkViewModel.addDrinkToLocalDatabase(
-                        firstPageData.name, "test", instructions.toString(),
-                        "test", "test", "test"
-                    )
+                        firstPageData.name, instructions.toString(),imageUrl.toString(), alcoholic)
 
                     for (ingredient in ingredientMeasureAdapter.ingredients){
                         val ingredientId = ingredientViewModel.addIngredientToLocalDatabase(
