@@ -5,6 +5,7 @@ import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import com.example.cocktailcatalog.api.ApiRoutes
 import com.example.cocktailcatalog.api.Deserializers.DrinkByIdDeserializer
 import com.example.cocktailcatalog.api.Deserializers.DrinkListByIngrediendDeserializer
@@ -41,6 +42,12 @@ class DrinkViewModel(application: Application) : AndroidViewModel(application) {
 
         val drink = LocalDrink(0, name, category, instructions, imgUrl, glassType, alcoholic)
         return@withContext drinkRepository.add(drink)
+    }
+
+    fun deleteDrinkFromLocalDb(drink: LocalDrink) {
+        viewModelScope.launch {
+            drinkRepository.delete(drink)
+        }
     }
 
     // API METHODS

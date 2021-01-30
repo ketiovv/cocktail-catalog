@@ -7,5 +7,7 @@ import com.example.cocktailcatalog.models.entities.LocalDrink
 
 class DrinkRepository(private val drinkDao: DrinkDao) {
     val allDrinks: LiveData<List<LocalDrink>> = drinkDao.getAll()
+
     suspend fun add(drink: LocalDrink): Long = drinkDao.insert(drink)
+    suspend fun delete(drink: LocalDrink) = drinkDao.delete(drink)
 }

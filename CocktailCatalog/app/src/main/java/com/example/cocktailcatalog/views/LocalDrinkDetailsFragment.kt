@@ -31,6 +31,7 @@ class LocalDrinkDetailsFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
 
+    private lateinit var drinkViewModel: DrinkViewModel
     private lateinit var ingredientViewModel: IngredientViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -43,6 +44,7 @@ class LocalDrinkDetailsFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
+        drinkViewModel = ViewModelProvider(requireActivity()).get(DrinkViewModel::class.java)
         ingredientViewModel = ViewModelProvider(requireActivity()).get(IngredientViewModel::class.java)
 
         ingredientViewModel.drinkIngredients.observe(viewLifecycleOwner){
@@ -76,6 +78,11 @@ class LocalDrinkDetailsFragment : Fragment() {
 
         buttonBackF.setOnClickListener {
             it.findNavController().navigate(R.id.action_localDrinkDetailsFragment_to_favoriteDrinksFragment)
+        }
+
+        buttonDeleteF.setOnClickListener {
+            it.findNavController().navigate(R.id.action_localDrinkDetailsFragment_to_favoriteDrinksFragment)
+            drinkViewModel.deleteDrinkFromLocalDb(DrinkViewModel.selectedLocalDrink)
         }
     }
 
