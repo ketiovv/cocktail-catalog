@@ -100,7 +100,7 @@ class SearchByNameFragment : Fragment() {
                     else{
                         drinkListAdapter.drinks = DrinkViewModel.allDrinks
                         drinkListAdapter.notifyDataSetChanged()
-                        viewModel.listOfDrinks.value!!.clear()
+//                        viewModel.listOfDrinks.value!!.clear()
                     }
                     return true
                 } else return false
