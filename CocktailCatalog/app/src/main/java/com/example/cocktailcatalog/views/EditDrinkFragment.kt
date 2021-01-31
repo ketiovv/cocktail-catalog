@@ -75,21 +75,29 @@ class EditDrinkFragment : Fragment() {
     }
 
     private fun initFields(){
-        editTextEditDrinkName.setText(DrinkViewModel.selectedLocalDrink.name)
-        editTextEditDrinkInstructions.setText(DrinkViewModel.selectedLocalDrink.instructions)
+        val drinkName = editTextEditDrinkName
+        val instructions = editTextEditDrinkInstructions
+        drinkName.setText(DrinkViewModel.selectedLocalDrink.name)
+        instructions.setText(DrinkViewModel.selectedLocalDrink.instructions)
         editTextEditDrinkImageURL.setText(DrinkViewModel.selectedLocalDrink.image)
         switchEditDrinkAlcoholic.isChecked = DrinkViewModel.selectedLocalDrink.alcoholic
         buttonSaveEditedFields.setOnClickListener {
-            // TODO: walidacja
-            drinkViewModel.updateDrinkInLocalDb(
-                DrinkViewModel.selectedLocalDrink,
-                editTextEditDrinkName.text.toString(),
-                editTextEditDrinkInstructions.text.toString(),
-                editTextEditDrinkImageURL.text.toString(),
-                switchEditDrinkAlcoholic.isChecked
-            )
-
-            it.findNavController().navigate(R.id.action_editDrinkFragment_to_favoriteDrinksFragment)
+            if (drinkName.text.isNullOrBlank()){
+                drinkName.error = "Name can't be empty!"
+            }
+            else if(instructions.text.isNullOrBlank()){
+                instructions.error = "Name can't be empty!"
+            }
+            else{
+                drinkViewModel.updateDrinkInLocalDb(
+                    DrinkViewModel.selectedLocalDrink,
+                    drinkName.text.toString(),
+                    instructions.text.toString(),
+                    editTextEditDrinkImageURL.text.toString(),
+                    switchEditDrinkAlcoholic.isChecked
+                )
+                it.findNavController().navigate(R.id.action_editDrinkFragment_to_favoriteDrinksFragment)
+            }
         }
     }
 
