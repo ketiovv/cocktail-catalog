@@ -29,7 +29,6 @@ class AgeCheckFragment : Fragment() {
 
         button_yes.setOnClickListener {
 
-
             sharedPref.edit().putString(getString(R.string.over_18), "true").commit()
             activity?.runOnUiThread {
                 activity?.bottomNavigationView!!.visibility = View.VISIBLE
