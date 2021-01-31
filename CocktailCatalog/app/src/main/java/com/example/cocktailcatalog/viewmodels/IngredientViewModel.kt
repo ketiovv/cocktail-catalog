@@ -10,6 +10,7 @@ import com.example.cocktailcatalog.api.IApiRequest
 import com.example.cocktailcatalog.models.AppDatabase
 import com.example.cocktailcatalog.models.entities.Ingredient
 import com.example.cocktailcatalog.models.entities.IngredientNamesList
+import com.example.cocktailcatalog.models.entities.LocalDrink
 import com.example.cocktailcatalog.models.repositories.IngredientRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -44,6 +45,12 @@ class IngredientViewModel(application: Application) : AndroidViewModel(applicati
     suspend fun addIngredientToLocalDatabase(name: String, measure: String, drinkId: Long): Long = withContext(Dispatchers.IO){
         val ingredient = Ingredient(0, name, measure, drinkId)
         return@withContext ingredientRepository.add(ingredient)
+    }
+
+    fun deleteIngredientFromLocalDb(ingredient: Ingredient) {
+        viewModelScope.launch {
+            ingredientRepository.delete(ingredient)
+        }
     }
 
     // API METHODS
