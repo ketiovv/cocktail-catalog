@@ -41,8 +41,7 @@ class DrinkViewModel(application: Application) : AndroidViewModel(application) {
             alcoholic: Boolean,
         ): Long = withContext(Dispatchers.IO){
 
-        //val drink = LocalDrink(0, name, instructions, imgUrl, alcoholic)
-        val drink = LocalDrink(0,name,instructions,"https://cdn-lubimyczytac.pl/upload/authors/94156/793655-352x500.jpg",alcoholic)
+        val drink = LocalDrink(0, name, instructions, imgUrl, alcoholic)
         return@withContext drinkRepository.add(drink)
     }
 
