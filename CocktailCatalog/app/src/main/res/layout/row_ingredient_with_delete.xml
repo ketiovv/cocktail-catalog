@@ -18,7 +18,7 @@
         android:textSize="16dp" />
 
     <ImageButton
-        android:id="@+id/buttonEditF"
+        android:id="@+id/buttonDeleteIngredient"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:backgroundTint="#00FFFFFF"
