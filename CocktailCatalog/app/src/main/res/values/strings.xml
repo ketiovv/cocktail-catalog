@@ -20,4 +20,5 @@
     <string name="image_url">Image URL</string>
     <string name="alcoholic">Alcoholic</string>
     <string name="add_drink">add drink</string>
+    <string name="save">Save</string>
 </resources>
