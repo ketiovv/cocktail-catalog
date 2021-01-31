@@ -41,14 +41,25 @@ class DrinkViewModel(application: Application) : AndroidViewModel(application) {
             alcoholic: Boolean,
         ): Long = withContext(Dispatchers.IO){
 
-        //val drink = LocalDrink(0, name, instructions, imgUrl, alcoholic)
-        val drink = LocalDrink(0,name,instructions,"https://cdn-lubimyczytac.pl/upload/authors/94156/793655-352x500.jpg",alcoholic)
+        val drink = LocalDrink(0, name, instructions, imgUrl, alcoholic)
         return@withContext drinkRepository.add(drink)
     }
 
     fun deleteDrinkFromLocalDb(drink: LocalDrink) {
         viewModelScope.launch {
             drinkRepository.delete(drink)
+        }
+    }
+
+    fun updateDrinkInLocalDb(
+        drink: LocalDrink,
+        newName: String,
+        newInstruction: String,
+        newImageUrl: String,
+        newAlcoholic: Boolean
+    ){
+        viewModelScope.launch {
+            drinkRepository.update(LocalDrink(drink.id, newName,newInstruction, newImageUrl, newAlcoholic))
         }
     }
 

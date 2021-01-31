@@ -80,6 +80,10 @@ class LocalDrinkDetailsFragment : Fragment() {
             it.findNavController().navigate(R.id.action_localDrinkDetailsFragment_to_favoriteDrinksFragment)
         }
 
+        buttonEditF.setOnClickListener {
+            it.findNavController().navigate(R.id.action_localDrinkDetailsFragment_to_editDrinkFragment)
+        }
+
         buttonDeleteF.setOnClickListener {
             it.findNavController().navigate(R.id.action_localDrinkDetailsFragment_to_favoriteDrinksFragment)
             drinkViewModel.deleteDrinkFromLocalDb(DrinkViewModel.selectedLocalDrink)

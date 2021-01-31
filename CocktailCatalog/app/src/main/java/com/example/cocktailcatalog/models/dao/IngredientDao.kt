@@ -2,6 +2,7 @@ package com.example.cocktailcatalog.models.dao
 
 import androidx.lifecycle.LiveData
 import androidx.room.Dao
+import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
 import com.example.cocktailcatalog.models.entities.Ingredient
@@ -17,4 +18,7 @@ interface IngredientDao {
 
     @Insert
     suspend fun insert(ingredient: Ingredient): Long
+
+    @Delete
+    suspend fun delete(ingredient: Ingredient)
 }

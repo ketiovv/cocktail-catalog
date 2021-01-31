@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginTop="40dp"
-        android:text="Instructions"
+        android:text="@string/instructions"
         android:textColor="#FFFFFF"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -22,7 +22,7 @@
     <EditText
         android:id="@+id/editTextNewDrinkInstructions"
         android:layout_width="247dp"
-        android:layout_height="59dp"
+        android:layout_height="65dp"
         android:layout_marginStart="24dp"
         android:layout_marginTop="24dp"
         android:ems="10"
@@ -34,23 +34,44 @@
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="64dp"
-        android:text="Image URL"
+        android:layout_marginTop="68dp"
+        android:text="@string/image_url"
         android:textColor="#FFFFFF"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="@+id/textViewNewDrinkInstructionLabel"
         app:layout_constraintTop_toBottomOf="@+id/textViewNewDrinkInstructionLabel" />
 
+    <EditText
+        android:id="@+id/editTextImageURL"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="36dp"
+        android:ems="10"
+        android:inputType="textUri"
+        app:layout_constraintStart_toStartOf="@+id/editTextNewDrinkInstructions"
+        app:layout_constraintTop_toBottomOf="@+id/editTextNewDrinkInstructions" />
+
     <TextView
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="48dp"
-        android:text="Alcoholic"
+        android:layout_marginTop="52dp"
+        android:text="@string/alcoholic"
         android:textColor="#FFFFFF"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="@+id/textView2"
         app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+    <Switch
+        android:id="@+id/switchAlcoholic"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="36dp"
+        android:checked="true"
+        app:layout_constraintStart_toStartOf="@+id/editTextImageURL"
+        app:layout_constraintTop_toBottomOf="@+id/editTextImageURL"
+        tools:ignore="UseSwitchCompatOrMaterialXml" />
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewIngredientsMeasureEntering"
@@ -70,31 +91,13 @@
         android:layout_width="162dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="15dp"
-        android:text="add drink"
+        android:text="@string/add_drink"
         android:textColor="#000000"
         app:cornerRadius="12dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <EditText
-        android:id="@+id/editTextImageURL"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="36dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        app:layout_constraintStart_toStartOf="@+id/editTextNewDrinkInstructions"
-        app:layout_constraintTop_toBottomOf="@+id/editTextNewDrinkInstructions" />
 
-    <Switch
-        android:id="@+id/switchAlcoholic"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="36dp"
-        android:checked="true"
-        app:layout_constraintStart_toStartOf="@+id/editTextImageURL"
-        app:layout_constraintTop_toBottomOf="@+id/editTextImageURL"
-        tools:ignore="UseSwitchCompatOrMaterialXml" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
