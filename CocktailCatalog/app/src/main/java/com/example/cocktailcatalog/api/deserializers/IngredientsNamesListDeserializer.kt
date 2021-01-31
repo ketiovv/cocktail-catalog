@@ -15,8 +15,6 @@ class IngredientsNamesListDeserializer: JsonDeserializer<IngredientNamesList> {
         typeOfT: Type?,
         context: JsonDeserializationContext?
     ): IngredientNamesList {
-        //Log.d("Test/Deserializer", "Using a custom deserializer for the Login request")
-
         val gson = Gson()
 
         val drinkList = DrinkList()

@@ -68,8 +68,11 @@ class IngredientViewModel(application: Application) : AndroidViewModel(applicati
                 var data = response.body()
 
                // Log.d("myTagData", data.toString())
+                unFilterIngredients.postValue(data)
 
                 listOfIngredientNames.postValue(data)
+
+
 
                 //Log.d("myTag", listOfIngredientNames.value.toString())
 
@@ -82,5 +85,6 @@ class IngredientViewModel(application: Application) : AndroidViewModel(applicati
     companion object{
             //TODO: Use viewmodel factory?
         lateinit var selectedIngredients : IngredientNamesList
+        var unFilterIngredients = MutableLiveData<IngredientNamesList>()
     }
 }

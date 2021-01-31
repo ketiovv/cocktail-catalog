@@ -66,7 +66,6 @@ class  DrinkListAdapter(var drinks: LiveData<DrinkList>, var clickCallback: ((d:
 //            }
 //        }
 //        else {
-//            "chuj"
 //            sections.add("A")
 //            mSectionPositions.add(0)
 //        }
