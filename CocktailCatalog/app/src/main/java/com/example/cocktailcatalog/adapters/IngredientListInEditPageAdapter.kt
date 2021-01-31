@@ -30,7 +30,8 @@ class IngredientListInEditPageAdapter(
 
     override fun onBindViewHolder(holder: IngredientListAdapter.Holder, position: Int) {
         val name = holder.itemView.findViewById<TextView>(R.id.textViewIDName)
-        name.text = ingredients.value?.get(position)?.name ?: "error"
+        val ingredientNameAndMeasure = ingredients.value?.get(position)?.name + " " + ingredients.value?.get(position)?.measure
+        name.text = ingredientNameAndMeasure
 
         val deleteBtn = holder.itemView.findViewById<ImageButton>(R.id.buttonDeleteIngredient)
         deleteBtn.setOnClickListener {
