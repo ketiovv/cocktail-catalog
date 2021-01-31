@@ -78,6 +78,7 @@ class DrinkViewModel(application: Application) : AndroidViewModel(application) {
                 if (response.isSuccessful){
                     var data = response.body()
                     if (data != null) {
+                        //Log.d("Size", data.size.toString())
                           listOfDrinks.postValue(data)
                     }
                 }
@@ -113,6 +114,7 @@ class DrinkViewModel(application: Application) : AndroidViewModel(application) {
                     Log.d("api-connection","response failed")
                 }
             }
+            //Log.d("Size", tmpList.size.toString())
             allDrinks.postValue(tmpList)
             //Log.d("myTag",listOfDrinks.value.toString())
         }
@@ -170,8 +172,6 @@ class DrinkViewModel(application: Application) : AndroidViewModel(application) {
             }
         }
     }
-
-
 
     companion object{
         lateinit var selectedDrink: Drink

@@ -36,7 +36,7 @@ class SearchByIngredientFragment : Fragment() {
         ingredientListAdapter = IngredientListAdapter(ingredientViewModel.listOfIngredientNames )
 
         ingredientViewModel.listOfIngredientNames.observe(viewLifecycleOwner, {
-            ingredientListAdapter.ingredientsUnFiltered = ingredientViewModel.listOfIngredientNames.value!!
+            ingredientListAdapter.ingredientsUnFiltered = IngredientViewModel.unFilterIngredients.value
             ingredientListAdapter.notifyDataSetChanged()
         })
 
@@ -57,22 +57,17 @@ class SearchByIngredientFragment : Fragment() {
             it.findNavController().navigate(R.id.action_searchFragment_to_searchResultsFragment)
         }
 
-//        searchViewIngredient.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-//            override fun onQueryTextSubmit(query: String?): Boolean {
-////                if (query != null){
-////                    viewModel.getDrinksByName(query)
-////                    return true
-////                }
-////                else return false
-//                searchViewIngredient.clearFocus()
-//                return true
-//            }
-//
-//            override fun onQueryTextChange(newText: String?): Boolean {
-//                ingredientListAdapter.filter.filter(newText)
-//                return true
-//            }
-//        })
+        searchViewIngredient.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                searchViewIngredient.clearFocus()
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                ingredientListAdapter.filter.filter(newText)
+                return true
+            }
+        })
 
     }
 

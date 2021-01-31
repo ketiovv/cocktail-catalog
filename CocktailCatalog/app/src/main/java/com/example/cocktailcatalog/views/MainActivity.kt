@@ -31,12 +31,10 @@ class MainActivity : AppCompatActivity() {
 
         sharedPref = this.getPreferences(Context.MODE_PRIVATE)
 
-
         if (!sharedPref.contains(getString(R.string.over_18))) {
             bottomNavigationView.visibility = View.GONE
             navController.navigate(R.id.ageCheckFragment)
         }
-
 
         //bottomNavigationView.outlineAmbientShadowColor = R.color.white
 

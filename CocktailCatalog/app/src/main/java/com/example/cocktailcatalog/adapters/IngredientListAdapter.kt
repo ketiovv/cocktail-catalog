@@ -1,6 +1,7 @@
 package com.example.cocktailcatalog.adapters
 
 import android.annotation.SuppressLint
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,15 +14,16 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.cocktailcatalog.R
 import com.example.cocktailcatalog.models.entities.Ingredient
 import com.example.cocktailcatalog.models.entities.IngredientNamesList
+import com.example.cocktailcatalog.viewmodels.IngredientViewModel
 import java.util.*
 import kotlin.collections.ArrayList
 
 
-class IngredientListAdapter(var ingredients: MutableLiveData<IngredientNamesList>) :RecyclerView.Adapter<IngredientListAdapter.Holder>(){
+class IngredientListAdapter(var ingredients: MutableLiveData<IngredientNamesList>) :RecyclerView.Adapter<IngredientListAdapter.Holder>(), Filterable{
     class Holder(view: View):RecyclerView.ViewHolder(view)
 
     val selectedIngredient: IngredientNamesList = IngredientNamesList()
-    lateinit var ingredientsUnFiltered: IngredientNamesList
+    var ingredientsUnFiltered = IngredientViewModel.unFilterIngredients.value
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
         val view = LayoutInflater.from(parent.context)
@@ -60,37 +62,33 @@ class IngredientListAdapter(var ingredients: MutableLiveData<IngredientNamesList
     override fun onBindViewHolder(holder: Holder, position: Int, payloads: MutableList<Any>) {
         super.onBindViewHolder(holder, position, payloads)
     }
+    
+    override fun getFilter(): Filter {
+        return object : Filter() {
+            override fun performFiltering(charSequence: CharSequence): FilterResults {
+                val query = charSequence.toString()
+                var filtered = IngredientNamesList()
+                if (query.isEmpty()) {
+                    filtered = ingredientsUnFiltered!!
+                } else {
+                    for (i in ingredientsUnFiltered!!) {
+                        if (i.toLowerCase(Locale.ROOT).contains(query.toLowerCase(Locale.ROOT))) {
+                            filtered.add(i)
+                        }
+                    }
+                }
+                val results = FilterResults()
+                results.count = filtered.size
+                results.values = filtered
 
+                return results
+            }
 
-
-//    override fun getFilter(): Filter {
-//        return object : Filter() {
-//            override fun performFiltering(charSequence: CharSequence): FilterResults {
-//                val query = charSequence.toString()
-//                var filtered = IngredientNamesList()
-//                if (query.isEmpty()) {
-//                    filtered = ingredientsUnFiltered
-//                } else {
-//                    for (i in ingredientsUnFiltered) {
-//                        if (i.toLowerCase(Locale.ROOT).contains(query.toLowerCase(Locale.ROOT))) {
-//                            filtered.add(i)
-//                        }
-//                    }
-//                }
-//                val results = FilterResults()
-//                results.count = filtered.size
-//                results.values = filtered
-//
-//                return results
-//            }
-//
-//            public override fun publishResults(charSequence: CharSequence?, results: FilterResults) {
-//                //Log.d("myTag", results.values.toString())
-//               ingredients.postValue(results.values as IngredientNamesList)
-//                this@IngredientListAdapter.notifyDataSetChanged()
-//            }
-//        }
-//    }
-
+            public override fun publishResults(charSequence: CharSequence?, results: FilterResults) {
+               ingredients.postValue(results.values as IngredientNamesList)
+                this@IngredientListAdapter.notifyDataSetChanged()
+            }
+        }
+    }
 
 }
