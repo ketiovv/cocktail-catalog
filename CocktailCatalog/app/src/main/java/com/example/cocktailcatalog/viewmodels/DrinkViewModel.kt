@@ -169,8 +169,6 @@ class DrinkViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
-
-
     companion object{
         lateinit var selectedDrink: Drink
         var allDrinks = MutableLiveData<DrinkList>()

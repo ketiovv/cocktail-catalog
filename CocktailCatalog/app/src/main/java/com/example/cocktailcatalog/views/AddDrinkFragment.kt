@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.SearchView
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.core.os.bundleOf
@@ -21,6 +22,7 @@ import com.example.cocktailcatalog.models.entities.LocalDrinkNameAndIngredients
 import com.example.cocktailcatalog.viewmodels.DrinkViewModel
 import com.example.cocktailcatalog.viewmodels.IngredientViewModel
 import kotlinx.android.synthetic.main.fragment_add_drink.*
+import kotlinx.android.synthetic.main.fragment_search_by_ingredient.*
 
 class AddDrinkFragment : Fragment() {
 
@@ -42,7 +44,7 @@ class AddDrinkFragment : Fragment() {
 
 
         ingredientViewModel.listOfIngredientNames.observe(viewLifecycleOwner, {
-            ingredientListAdapter.ingredientsUnFiltered = ingredientViewModel.listOfIngredientNames.value!!
+            ingredientListAdapter.ingredientsUnFiltered = IngredientViewModel.unFilterIngredients.value
             ingredientListAdapter.notifyDataSetChanged()
         })
 
@@ -79,6 +81,18 @@ class AddDrinkFragment : Fragment() {
                 )
             }
         }
+
+        searchViewAddIngredient.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                searchViewIngredient.clearFocus()
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                ingredientListAdapter.filter.filter(newText)
+                return true
+            }
+        })
     }
 
     companion object {

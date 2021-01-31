@@ -2,6 +2,7 @@ package com.example.cocktailcatalog.views
 
 import android.graphics.Typeface
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -25,8 +26,8 @@ class SearchByNameFragment : Fragment() {
 
 
     private lateinit var drinkListAdapter: DrinkListAdapter
-    private lateinit var ingredientViewModel: IngredientViewModel
     private lateinit var viewManager: RecyclerView.LayoutManager
+    private lateinit var viewModel: DrinkViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,7 +35,7 @@ class SearchByNameFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
 
-
+        viewModel = ViewModelProvider(this).get(DrinkViewModel::class.java)
         viewManager = LinearLayoutManager(requireContext())
         drinkListAdapter = DrinkListAdapter(DrinkViewModel.allDrinks){
             DrinkViewModel.selectedDrink = it
@@ -46,6 +47,11 @@ class SearchByNameFragment : Fragment() {
             recyclerViewDrinkListSearch.visibility = View.VISIBLE
             drinkListAdapter.notifyDataSetChanged()
         })
+
+        viewModel.listOfDrinks.observe(viewLifecycleOwner, {
+            drinkListAdapter.notifyDataSetChanged()
+        })
+
 
         return inflater.inflate(R.layout.fragment_search_drink, container, false)
     }
@@ -84,18 +90,32 @@ class SearchByNameFragment : Fragment() {
         searchViewDrink.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
 
             override fun onQueryTextSubmit(query: String?): Boolean {
-//                if (query != null){
-//                    viewModel.getDrinksByName(query)
-//                    return true
-//                }
-//                else return false
+                if (query != null){
+                    viewModel.getDrinksByName(query)
+
+                    drinkListAdapter = DrinkListAdapter(viewModel.listOfDrinks){
+                        DrinkViewModel.selectedDrink = it
+                        view.findNavController().navigate(R.id.action_searchFragment_to_drinkDetailsFragment)
+                    }
+
+                    return true
+                }
                 searchViewDrink.clearFocus()
-                return true
+                return false
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
                 if (newText != null) {
-                    //viewModel.getDrinksByName(newText)
+                    viewModel.getDrinksByName(newText)
+
+                    Log.d("myTag", newText)
+                    drinkListAdapter = DrinkListAdapter(viewModel.listOfDrinks){
+                        DrinkViewModel.selectedDrink = it
+                        view.findNavController().navigate(R.id.action_searchFragment_to_drinkDetailsFragment)
+                    }
+
+                    drinkListAdapter.notifyDataSetChanged()
+
                     return true
                 } else return false
             }

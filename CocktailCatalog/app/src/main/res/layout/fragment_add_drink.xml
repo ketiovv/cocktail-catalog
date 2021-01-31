@@ -12,6 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="36dp"
         android:layout_marginTop="24dp"
+
         android:text="@string/name"
         android:textColor="#FFFFFF"
         android:textSize="18sp"
@@ -46,14 +47,14 @@
         android:id="@+id/recyclerViewIngredientListToCheck"
         android:layout_width="334dp"
         android:layout_height="0dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
         android:overScrollMode="ifContentScrolls"
         app:layout_constraintBottom_toTopOf="@+id/buttonMoveToNextPage"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewNewDrinkIngredientsLabel" />
+        app:layout_constraintTop_toBottomOf="@+id/searchViewAddIngredient" />
 
     <Button
         android:id="@+id/buttonMoveToNextPage"
@@ -66,5 +67,17 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <SearchView
+        android:id="@+id/searchViewAddIngredient"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="2dp"
+        android:layout_marginTop="4dp"
+        android:foregroundTint="#FFFFFF"
+        android:iconifiedByDefault="false"
+        android:submitBackground="@color/white"
+        app:layout_constraintStart_toStartOf="@+id/textViewNewDrinkNameLabel"
+        app:layout_constraintTop_toBottomOf="@+id/textViewNewDrinkIngredientsLabel" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

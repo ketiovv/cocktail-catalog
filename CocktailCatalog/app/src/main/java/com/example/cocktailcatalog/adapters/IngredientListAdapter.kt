@@ -1,6 +1,7 @@
 package com.example.cocktailcatalog.adapters
 
 import android.annotation.SuppressLint
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.cocktailcatalog.R
 import com.example.cocktailcatalog.models.entities.Ingredient
 import com.example.cocktailcatalog.models.entities.IngredientNamesList
+import com.example.cocktailcatalog.viewmodels.IngredientViewModel
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -21,7 +23,7 @@ class IngredientListAdapter(var ingredients: MutableLiveData<IngredientNamesList
     class Holder(view: View):RecyclerView.ViewHolder(view)
 
     val selectedIngredient: IngredientNamesList = IngredientNamesList()
-    lateinit var ingredientsUnFiltered: IngredientNamesList
+    var ingredientsUnFiltered = IngredientViewModel.unFilterIngredients.value
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
         val view = LayoutInflater.from(parent.context)
@@ -67,9 +69,9 @@ class IngredientListAdapter(var ingredients: MutableLiveData<IngredientNamesList
                 val query = charSequence.toString()
                 var filtered = IngredientNamesList()
                 if (query.isEmpty()) {
-                    filtered = ingredientsUnFiltered
+                    filtered = ingredientsUnFiltered!!
                 } else {
-                    for (i in ingredientsUnFiltered) {
+                    for (i in ingredientsUnFiltered!!) {
                         if (i.toLowerCase(Locale.ROOT).contains(query.toLowerCase(Locale.ROOT))) {
                             filtered.add(i)
                         }
@@ -83,7 +85,6 @@ class IngredientListAdapter(var ingredients: MutableLiveData<IngredientNamesList
             }
 
             public override fun publishResults(charSequence: CharSequence?, results: FilterResults) {
-                //Log.d("myTag", results.values.toString())
                ingredients.postValue(results.values as IngredientNamesList)
                 this@IngredientListAdapter.notifyDataSetChanged()
             }
