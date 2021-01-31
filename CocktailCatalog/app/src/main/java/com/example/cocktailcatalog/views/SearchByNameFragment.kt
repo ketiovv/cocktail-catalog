@@ -7,18 +7,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.SearchView
-import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import androidx.viewpager2.widget.ViewPager2
 import com.example.cocktailcatalog.adapters.DrinkListAdapter
-
 import com.example.cocktailcatalog.R
 import com.example.cocktailcatalog.viewmodels.DrinkViewModel
-import com.example.cocktailcatalog.viewmodels.IngredientViewModel
 import kotlinx.android.synthetic.main.fragment_search_drink.*
 
 
@@ -90,32 +86,22 @@ class SearchByNameFragment : Fragment() {
         searchViewDrink.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
 
             override fun onQueryTextSubmit(query: String?): Boolean {
-                if (query != null){
-                    viewModel.getDrinksByName(query)
-
-                    drinkListAdapter = DrinkListAdapter(viewModel.listOfDrinks){
-                        DrinkViewModel.selectedDrink = it
-                        view.findNavController().navigate(R.id.action_searchFragment_to_drinkDetailsFragment)
-                    }
-
-                    return true
-                }
                 searchViewDrink.clearFocus()
-                return false
+                return true
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
                 if (newText != null) {
-                    viewModel.getDrinksByName(newText)
-
-                    Log.d("myTag", newText)
-                    drinkListAdapter = DrinkListAdapter(viewModel.listOfDrinks){
-                        DrinkViewModel.selectedDrink = it
-                        view.findNavController().navigate(R.id.action_searchFragment_to_drinkDetailsFragment)
+                    if(newText!="") {
+                        viewModel.getDrinksByName(newText)
+                        drinkListAdapter.drinks = viewModel.listOfDrinks
+                        drinkListAdapter.notifyDataSetChanged()
                     }
-
-                    drinkListAdapter.notifyDataSetChanged()
-
+                    else{
+                        drinkListAdapter.drinks = DrinkViewModel.allDrinks
+                        drinkListAdapter.notifyDataSetChanged()
+                        viewModel.listOfDrinks.value!!.clear()
+                    }
                     return true
                 } else return false
             }

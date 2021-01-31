@@ -21,8 +21,6 @@ class DrinkListByIngrediendDeserializer: JsonDeserializer<DrinkList> {
 
 //        var drink = gson.fromJson(json, Drink::class.java)
 
-
-
         val jsonObject = json!!.asJsonObject
         //Log.d("myTag", jsonObject.asString)
         var jsonDrinks = jsonObject.get("drinks")

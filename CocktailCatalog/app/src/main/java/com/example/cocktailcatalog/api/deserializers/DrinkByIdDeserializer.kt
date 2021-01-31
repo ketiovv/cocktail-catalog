@@ -12,13 +12,10 @@ class DrinkByIdDeserializer: JsonDeserializer<Drink> {
         typeOfT: Type?,
         context: JsonDeserializationContext?
     ): Drink {
-        //Log.d("Test/Deserializer", "Using a custom deserializer for the Login request")
 
         val gson = Gson()
 
         var drink = gson.fromJson(json, Drink::class.java)
-
-
 
         val jsonObject = json!!.asJsonObject
         var jsonDrinks = jsonObject.get("drinks")
@@ -51,9 +48,7 @@ class DrinkByIdDeserializer: JsonDeserializer<Drink> {
                 }
                 drink.ingredients = ingredientList
 
-
             }
-
         }
         else{
             drink = Drink("","","","","","","",false)
