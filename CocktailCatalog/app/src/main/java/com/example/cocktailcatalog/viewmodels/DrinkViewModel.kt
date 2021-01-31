@@ -25,7 +25,7 @@ import retrofit2.awaitResponse
 
 class DrinkViewModel(application: Application) : AndroidViewModel(application) {
     var listOfDrinks = MutableLiveData<DrinkList>()
-
+    var recentDrinks=MutableLiveData<DrinkList>()
 
     var alphabet = arrayListOf<String>("A","B","C","D","E","F","G","H","I","J","K","L","M","N","O",
             "P","Q","R","S","T","U","V","W","X","Y","Z","1","2","3","4","5","6","7","9","'")
@@ -34,6 +34,8 @@ class DrinkViewModel(application: Application) : AndroidViewModel(application) {
     val allLocalDrinks = drinkRepository.allDrinks
 
     // DB METHODS
+
+
     suspend fun addDrinkToLocalDatabase(
             name: String,
             instructions: String,
