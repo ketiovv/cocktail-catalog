@@ -22,4 +22,7 @@
     <string name="alcoholic">Alcoholic</string>
     <string name="add_drink">add drink</string>
     <string name="save">Save</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="over_18">false</string>
 </resources>

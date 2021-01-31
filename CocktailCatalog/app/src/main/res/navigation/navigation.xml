@@ -83,9 +83,14 @@
         android:id="@+id/editDrinkFragment"
         android:name="com.example.cocktailcatalog.views.EditDrinkFragment"
         android:label="fragment_edit_drink"
-        tools:layout="@layout/fragment_edit_drink" >
+        tools:layout="@layout/fragment_edit_drink">
         <action
             android:id="@+id/action_editDrinkFragment_to_favoriteDrinksFragment"
             app:destination="@id/favoriteDrinksFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/ageCheckFragment"
+        android:name="com.example.cocktailcatalog.views.AgeCheckFragment"
+        android:label="fragment_age_check"
+        tools:layout="@layout/fragment_age_check" />
 </navigation>
