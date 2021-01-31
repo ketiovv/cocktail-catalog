@@ -13,4 +13,11 @@
     <string name="ingredients">Ingredients:</string>
     <string name="search_results">Drinks that You can make:</string>
     <string name="no_drinks_found">Sorry, no drinks found</string>
+    <string name="name">Name</string>
+    <string name="select_drink_ingredients">Select drink ingredients:</string>
+    <string name="next_step">next step</string>
+    <string name="instructions">Instructions</string>
+    <string name="image_url">Image URL</string>
+    <string name="alcoholic">Alcoholic</string>
+    <string name="add_drink">add drink</string>
 </resources>
