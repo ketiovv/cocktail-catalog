@@ -52,6 +52,18 @@ class DrinkViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
+    fun updateDrinkInLocalDb(
+        drink: LocalDrink,
+        newName: String,
+        newInstruction: String,
+        newImageUrl: String,
+        newAlcoholic: Boolean
+    ){
+        viewModelScope.launch {
+            drinkRepository.update(LocalDrink(drink.id, newName,newInstruction, newImageUrl, newAlcoholic))
+        }
+    }
+
     // API METHODS
     fun getDrinksByName(name: String){
         var tmpList = DrinkList()

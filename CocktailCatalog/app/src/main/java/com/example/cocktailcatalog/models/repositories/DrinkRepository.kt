@@ -10,4 +10,5 @@ class DrinkRepository(private val drinkDao: DrinkDao) {
 
     suspend fun add(drink: LocalDrink): Long = drinkDao.insert(drink)
     suspend fun delete(drink: LocalDrink) = drinkDao.delete(drink)
+    suspend fun update(drink: LocalDrink) = drinkDao.update(drink)
 }
