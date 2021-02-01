@@ -53,18 +53,33 @@ class DrinkDetailsFragment : Fragment() {
                 textViewIngredientsList.text = textViewIngredientsList.text.toString() + "${i.measure} ${i.name} \n"
         }
 
-
-        buttonAddToFavorites.setOnClickListener {
-            //TODO: Change to list contains,
-            if(DrinkViewModel.selectedDrink.favorite){
-                buttonAddToFavorites.setImageResource(R.drawable.ic_baseline_favorite_border_24_kici)
-                DrinkViewModel.selectedDrink.favorite = false
-                textViewAddToFavorites.text = getString(R.string.add_to_favorite )
-            }
-            else if(!DrinkViewModel.selectedDrink.favorite){
+        lifecycleScope.launch {
+            if (viewModel.checkIfDrinkIsFavourite(DrinkViewModel.selectedDrink)) {
                 buttonAddToFavorites.setImageResource(R.drawable.ic_baseline_favorite_24_kivi)
                 DrinkViewModel.selectedDrink.favorite = true
                 textViewAddToFavorites.text = getString(R.string.remove_from_favorite)
+            } else {
+                buttonAddToFavorites.setImageResource(R.drawable.ic_baseline_favorite_border_24_kici)
+                DrinkViewModel.selectedDrink.favorite = false
+                textViewAddToFavorites.text = getString(R.string.add_to_favorite)
+            }
+        }
+
+
+        buttonAddToFavorites.setOnClickListener {
+            lifecycleScope.launch {
+                if (viewModel.checkIfDrinkIsFavourite(DrinkViewModel.selectedDrink)) {
+                    buttonAddToFavorites.setImageResource(R.drawable.ic_baseline_favorite_border_24_kici)
+                    DrinkViewModel.selectedDrink.favorite = false
+                    textViewAddToFavorites.text = getString(R.string.add_to_favorite)
+                    viewModel.deleteDrinkFromFavourites(DrinkViewModel.selectedDrink)
+
+                } else if (!viewModel.checkIfDrinkIsFavourite(DrinkViewModel.selectedDrink)) {
+                    buttonAddToFavorites.setImageResource(R.drawable.ic_baseline_favorite_24_kivi)
+                    DrinkViewModel.selectedDrink.favorite = true
+                    textViewAddToFavorites.text = getString(R.string.remove_from_favorite)
+                    viewModel.addDrinkToFavourite(DrinkViewModel.selectedDrink)
+                }
             }
         }
 

@@ -4,7 +4,6 @@ import android.app.Application
 import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Transformations
 import androidx.lifecycle.viewModelScope
 import com.example.cocktailcatalog.api.ApiRoutes
 import com.example.cocktailcatalog.api.deserializers.DrinkByIdDeserializer
@@ -14,6 +13,7 @@ import com.example.cocktailcatalog.api.IApiRequest
 import com.example.cocktailcatalog.models.AppDatabase
 import com.example.cocktailcatalog.models.entities.*
 import com.example.cocktailcatalog.models.repositories.DrinkRepository
+import com.example.cocktailcatalog.models.repositories.FavouriteDrinkRepository
 import com.example.cocktailcatalog.models.repositories.HistoryRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -25,7 +25,6 @@ import java.util.*
 
 class DrinkViewModel(application: Application) : AndroidViewModel(application) {
     var listOfDrinks = MutableLiveData<DrinkList>()
-
 
     var alphabet = arrayListOf<String>(
         "A",
@@ -66,11 +65,11 @@ class DrinkViewModel(application: Application) : AndroidViewModel(application) {
     )
     private val historyRepository =
         HistoryRepository(AppDatabase.getDatabase(application).historyDao())
+    private val favouriteDrinkRepository = FavouriteDrinkRepository(AppDatabase.getDatabase(application).favouriteDrinkDao())
     private val drinkRepository = DrinkRepository(AppDatabase.getDatabase(application).drinkDao())
     val allLocalDrinks = drinkRepository.allDrinks
+
     // DB METHODS
-
-
     suspend fun addDrinkToLocalDatabase(
         name: String,
         instructions: String,
@@ -127,6 +126,42 @@ class DrinkViewModel(application: Application) : AndroidViewModel(application) {
 
     }
 
+    fun getFavouriteDrinks(){
+        GlobalScope.launch(Dispatchers.IO) {
+            var favouriteDrinks = DrinkList()
+            var fav = favouriteDrinkRepository.getAllFavourites()
+
+            fav.forEach { fav ->
+                kotlin.run {
+                    var drink = allDrinks.value?.find { drink -> drink.id == fav.drinkId.toString() }
+                    drink?.let { favouriteDrinks.add(it) }
+                }
+            }
+            listOfDrinks.postValue(favouriteDrinks)
+        }
+    }
+
+    suspend fun checkIfDrinkIsFavourite(drink: Drink): Boolean = withContext(Dispatchers.IO) {
+        var listOfFavourite = favouriteDrinkRepository.getAllFavourites()
+        return@withContext listOfFavourite.contains(FavouriteDrink(drink.id.toInt()))
+    }
+
+
+    fun addDrinkToFavourite(drink: Drink){
+        viewModelScope.launch {
+            val favourite = FavouriteDrink(drink.id.toInt())
+            favouriteDrinkRepository.add(favourite)
+        }
+    }
+
+    fun deleteDrinkFromFavourites(drink: Drink) {
+        viewModelScope.launch {
+            var fav = FavouriteDrink(drink.id.toInt())
+            favouriteDrinkRepository.delete(fav)
+        }
+    }
+
+
     suspend fun addDrinkToHistory(
         drink: Drink
     ) {
@@ -135,6 +170,7 @@ class DrinkViewModel(application: Application) : AndroidViewModel(application) {
         historyRepository.add(history)
 
     }
+
 
     // API METHODS
     fun getDrinksByName(name: String) {

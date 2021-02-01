@@ -40,6 +40,9 @@
         <action
             android:id="@+id/action_favoriteDrinksFragment_to_localDrinkDetailsFragment"
             app:destination="@id/localDrinkDetailsFragment" />
+        <action
+            android:id="@+id/action_favoriteDrinksFragment_to_drinkDetailsFragment"
+            app:destination="@id/drinkDetailsFragment" />
     </fragment>
     <fragment
         android:id="@+id/drinkDetailsFragment"

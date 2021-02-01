@@ -5,23 +5,27 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.example.cocktailcatalog.models.dao.DrinkDao
+import com.example.cocktailcatalog.models.dao.FavouriteDrinkDao
 import com.example.cocktailcatalog.models.dao.HistoryDao
 import com.example.cocktailcatalog.models.dao.IngredientDao
+import com.example.cocktailcatalog.models.entities.FavouriteDrink
 import com.example.cocktailcatalog.models.entities.History
 import com.example.cocktailcatalog.models.entities.Ingredient
 import com.example.cocktailcatalog.models.entities.LocalDrink
 
 @Database(
     entities = [LocalDrink::class,
-        Ingredient::class,
-        History::class],
-    version = 2,
+                Ingredient::class,
+                History::class,
+                FavouriteDrink::class],
+    version = 3,
     exportSchema = false
 )
 abstract class AppDatabase : RoomDatabase() {
     abstract fun drinkDao(): DrinkDao
     abstract fun ingredientDao(): IngredientDao
     abstract fun historyDao(): HistoryDao
+    abstract fun favouriteDrinkDao(): FavouriteDrinkDao
 
     companion object {
         @Volatile
