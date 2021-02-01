@@ -74,7 +74,11 @@ class AddDrinkDetailsFragment : Fragment() {
             else {
                 lifecycleScope.launch{
                     val drinkId = drinkViewModel.addDrinkToLocalDatabase(
-                        firstPageData.name, instructions.toString(),imageUrl.toString(), alcoholic.isChecked)
+                        firstPageData.name,
+                        instructions.toString(),
+                        imageUrl.toString(),
+                        alcoholic.isChecked,
+                        spinnerAddDrinkCategory.selectedItem.toString())
 
                     for (ingredient in ingredientMeasureAdapter.ingredients){
                         val ingredientId = ingredientViewModel.addIngredientToLocalDatabase(

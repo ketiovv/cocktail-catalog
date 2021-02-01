@@ -45,6 +45,7 @@ class LocalDrinkDetailsFragment : Fragment() {
 
         textViewDrinkNameDF.text = DrinkViewModel.selectedLocalDrink.name
         textViewInstructionsF.text = DrinkViewModel.selectedLocalDrink.instructions
+        textViewCategoryLocal.text = requireContext().getString(R.string.drink_category) + " " + DrinkViewModel.selectedLocalDrink.category
 
         if (DrinkViewModel.selectedLocalDrink.image.isNullOrBlank()){
             imageViewF.visibility  = View.GONE

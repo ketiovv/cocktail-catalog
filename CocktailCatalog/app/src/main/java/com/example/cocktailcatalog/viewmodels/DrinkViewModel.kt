@@ -89,9 +89,10 @@ class DrinkViewModel(application: Application) : AndroidViewModel(application) {
         instructions: String,
         imgUrl: String,
         alcoholic: Boolean,
+        category: String
     ): Long = withContext(Dispatchers.IO) {
 
-        val drink = LocalDrink(0, name, instructions, imgUrl, alcoholic,"test")
+        val drink = LocalDrink(0, name, instructions, imgUrl, alcoholic, category)
         return@withContext drinkRepository.add(drink)
     }
 
