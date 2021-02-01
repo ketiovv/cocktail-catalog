@@ -11,7 +11,7 @@ import com.example.cocktailcatalog.models.entities.LocalDrink
 @Dao
 interface HistoryDao {
 
-    @Query("SELECT * FROM history_table")
+    @Query("SELECT * FROM history_table order by date desc ")
     fun getAll(): List<History>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
