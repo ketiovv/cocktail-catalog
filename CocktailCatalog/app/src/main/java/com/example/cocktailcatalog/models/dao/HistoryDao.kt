@@ -12,7 +12,7 @@ import com.example.cocktailcatalog.models.entities.LocalDrink
 interface HistoryDao {
 
     @Query("SELECT * FROM history_table")
-    fun getAll(): LiveData<List<History>>
+    fun getAll(): List<History>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(history: History):Long

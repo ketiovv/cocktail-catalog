@@ -4,6 +4,7 @@ import android.app.Application
 import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Transformations
 import androidx.lifecycle.viewModelScope
 import com.example.cocktailcatalog.api.ApiRoutes
 import com.example.cocktailcatalog.api.deserializers.DrinkByIdDeserializer
@@ -11,37 +12,71 @@ import com.example.cocktailcatalog.api.deserializers.DrinkListByIngrediendDeseri
 import com.example.cocktailcatalog.api.deserializers.DrinkListDeserializer
 import com.example.cocktailcatalog.api.IApiRequest
 import com.example.cocktailcatalog.models.AppDatabase
-import com.example.cocktailcatalog.models.entities.Drink
-import com.example.cocktailcatalog.models.entities.DrinkList
-import com.example.cocktailcatalog.models.entities.IngredientNamesList
-import com.example.cocktailcatalog.models.entities.LocalDrink
+import com.example.cocktailcatalog.models.entities.*
 import com.example.cocktailcatalog.models.repositories.DrinkRepository
+import com.example.cocktailcatalog.models.repositories.HistoryRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import retrofit2.Retrofit
 import retrofit2.awaitResponse
+import java.util.*
 
 class DrinkViewModel(application: Application) : AndroidViewModel(application) {
     var listOfDrinks = MutableLiveData<DrinkList>()
-    var recentDrinks=MutableLiveData<DrinkList>()
 
-    var alphabet = arrayListOf<String>("A","B","C","D","E","F","G","H","I","J","K","L","M","N","O",
-            "P","Q","R","S","T","U","V","W","X","Y","Z","1","2","3","4","5","6","7","9","'")
 
+    var alphabet = arrayListOf<String>(
+        "A",
+        "B",
+        "C",
+        "D",
+        "E",
+        "F",
+        "G",
+        "H",
+        "I",
+        "J",
+        "K",
+        "L",
+        "M",
+        "N",
+        "O",
+        "P",
+        "Q",
+        "R",
+        "S",
+        "T",
+        "U",
+        "V",
+        "W",
+        "X",
+        "Y",
+        "Z",
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "9",
+        "'"
+    )
+    private val historyRepository =
+        HistoryRepository(AppDatabase.getDatabase(application).historyDao())
     private val drinkRepository = DrinkRepository(AppDatabase.getDatabase(application).drinkDao())
     val allLocalDrinks = drinkRepository.allDrinks
-
     // DB METHODS
 
 
     suspend fun addDrinkToLocalDatabase(
-            name: String,
-            instructions: String,
-            imgUrl: String,
-            alcoholic: Boolean,
-        ): Long = withContext(Dispatchers.IO){
+        name: String,
+        instructions: String,
+        imgUrl: String,
+        alcoholic: Boolean,
+    ): Long = withContext(Dispatchers.IO) {
 
         val drink = LocalDrink(0, name, instructions, imgUrl, alcoholic)
         return@withContext drinkRepository.add(drink)
@@ -59,47 +94,92 @@ class DrinkViewModel(application: Application) : AndroidViewModel(application) {
         newInstruction: String,
         newImageUrl: String,
         newAlcoholic: Boolean
-    ){
+    ) {
         viewModelScope.launch {
-            drinkRepository.update(LocalDrink(drink.id, newName,newInstruction, newImageUrl, newAlcoholic))
+            drinkRepository.update(
+                LocalDrink(
+                    drink.id,
+                    newName,
+                    newInstruction,
+                    newImageUrl,
+                    newAlcoholic
+                )
+            )
         }
+    }
+
+    fun getRecentDrinks() {
+
+        GlobalScope.launch(Dispatchers.IO) {
+            var recentDrinks = DrinkList()
+            var history = historyRepository.getAllHistory()
+
+            history.forEach { history ->
+                run {
+                    var drink =
+                        allDrinks.value?.find { drink -> drink.id == history.drinkId.toString() }
+                    drink?.let { recentDrinks.add(it) }
+                }
+            }
+
+            listOfDrinks.postValue(recentDrinks)
+        }
+
+    }
+
+    suspend fun addDrinkToHistory(
+        drink: Drink
+    ) {
+
+        val history = History(drink.id.toInt(), Date())
+        historyRepository.add(history)
+
     }
 
     // API METHODS
-    fun getDrinksByName(name: String){
+    fun getDrinksByName(name: String) {
         var tmpList = DrinkList()
         val api = Retrofit.Builder().baseUrl(ApiRoutes.BASE_URL)
-                .addConverterFactory(ApiRoutes.bulidGsonConverter(DrinkList::class.java, DrinkListDeserializer())).build()
-                .create(IApiRequest::class.java)
+            .addConverterFactory(
+                ApiRoutes.bulidGsonConverter(
+                    DrinkList::class.java,
+                    DrinkListDeserializer()
+                )
+            ).build()
+            .create(IApiRequest::class.java)
 
         GlobalScope.launch(Dispatchers.IO) {
-                val response  = api.getDrinksByName(name).awaitResponse()
+            val response = api.getDrinksByName(name).awaitResponse()
 
-                if (response.isSuccessful){
-                    var data = response.body()
-                    if (data != null) {
-                        //Log.d("Size", data.size.toString())
-                          listOfDrinks.postValue(data)
-                    }
+            if (response.isSuccessful) {
+                var data = response.body()
+                if (data != null) {
+                    //Log.d("Size", data.size.toString())
+                    listOfDrinks.postValue(data)
                 }
-                else{
-                    Log.d("api-connection","response failed")
-                }
+            } else {
+                Log.d("api-connection", "response failed")
+            }
         }
     }
 
-    fun getAllDrinks(){
+    fun getAllDrinks() {
         var tmpList = DrinkList()
         val api = Retrofit.Builder().baseUrl(ApiRoutes.BASE_URL)
-                .addConverterFactory(ApiRoutes.bulidGsonConverter(DrinkList::class.java, DrinkListDeserializer())).build()
-                .create(IApiRequest::class.java)
+            .addConverterFactory(
+                ApiRoutes.bulidGsonConverter(
+                    DrinkList::class.java,
+                    DrinkListDeserializer()
+                )
+            ).build()
+            .create(IApiRequest::class.java)
 
         GlobalScope.launch(Dispatchers.IO) {
 
-            for (letter in alphabet){
-                val response  = api.getDrinksByFirstLetter(letter).awaitResponse()
+            for (letter in alphabet) {
+                val response = api.getDrinksByFirstLetter(letter).awaitResponse()
 
-                if (response.isSuccessful){
+                if (response.isSuccessful) {
                     var data = response.body()
                     if (data != null) {
 //                        if(letter == "A")
@@ -109,9 +189,8 @@ class DrinkViewModel(application: Application) : AndroidViewModel(application) {
                         tmpList.addAll(data)
                     }
 
-                }
-                else{
-                    Log.d("api-connection","response failed")
+                } else {
+                    Log.d("api-connection", "response failed")
                 }
             }
             //Log.d("Size", tmpList.size.toString())
@@ -120,60 +199,66 @@ class DrinkViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
-    fun getDrinksByIngrediends(ingredientList : IngredientNamesList)
-    {
+    fun getDrinksByIngrediends(ingredientList: IngredientNamesList) {
         //   val request = ingredientList.toString().trimStart('[').trimEnd(']').replace(" ","")
-        var request:String = ""
-        for(i in ingredientList)
-        {
+        var request: String = ""
+        for (i in ingredientList) {
             request += "${i},"
 
         }
         request = request.trimEnd(',')
         // Log.d("myTag", request)
         val api = Retrofit.Builder().baseUrl(ApiRoutes.BASE_URL)
-                .addConverterFactory(ApiRoutes.bulidGsonConverter(DrinkList::class.java, DrinkListByIngrediendDeserializer())).build()
-                .create(IApiRequest::class.java)
+            .addConverterFactory(
+                ApiRoutes.bulidGsonConverter(
+                    DrinkList::class.java,
+                    DrinkListByIngrediendDeserializer()
+                )
+            ).build()
+            .create(IApiRequest::class.java)
 
         GlobalScope.launch(Dispatchers.IO) {
 
-            val response  = api.getDrinksByIngredients(request).awaitResponse()
+            val response = api.getDrinksByIngredients(request).awaitResponse()
 
-            if (response.isSuccessful){
+            if (response.isSuccessful) {
                 var data = response.body()
                 listOfDrinks.postValue(data)
-            }
-            else{
-                Log.d("api-connection","response failed")
+            } else {
+                Log.d("api-connection", "response failed")
             }
         }
     }
 
-    fun getDrinksById(id: String, doneCallback: ((d: Drink) -> Unit)){
+    fun getDrinksById(id: String, doneCallback: ((d: Drink) -> Unit)) {
 
         val api = Retrofit.Builder().baseUrl(ApiRoutes.BASE_URL)
-                .addConverterFactory(ApiRoutes.bulidGsonConverter(Drink::class.java, DrinkByIdDeserializer())).build()
-                .create(IApiRequest::class.java)
+            .addConverterFactory(
+                ApiRoutes.bulidGsonConverter(
+                    Drink::class.java,
+                    DrinkByIdDeserializer()
+                )
+            ).build()
+            .create(IApiRequest::class.java)
 
         GlobalScope.launch(Dispatchers.IO) {
 
-            val response  = api.getDrinkById(id).awaitResponse()
+            val response = api.getDrinkById(id).awaitResponse()
 
-            if (response.isSuccessful){
+            if (response.isSuccessful) {
 
                 val data = response.body()
                 if (data != null) {
                     doneCallback(data)
                 }
                 ///Log.d("myTag", listOfDrinks.value.toString())
-            }
-            else{
-                Log.d("api-connection","response failed")
+            } else {
+                Log.d("api-connection", "response failed")
             }
         }
     }
 
-    companion object{
+    companion object {
         lateinit var selectedDrink: Drink
         var allDrinks = MutableLiveData<DrinkList>()
         lateinit var selectedLocalDrink: LocalDrink

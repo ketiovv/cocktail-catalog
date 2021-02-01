@@ -40,6 +40,5 @@ class MainActivity : AppCompatActivity() {
 
         viewModel = ViewModelProvider(this).get(DrinkViewModel::class.java)
         viewModel.getAllDrinks()
-
     }
 }

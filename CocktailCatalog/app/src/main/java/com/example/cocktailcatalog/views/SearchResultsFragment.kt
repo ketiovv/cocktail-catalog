@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -13,8 +14,8 @@ import com.example.cocktailcatalog.adapters.DrinkListAdapter
 import com.example.cocktailcatalog.R
 import com.example.cocktailcatalog.viewmodels.DrinkViewModel
 import com.example.cocktailcatalog.viewmodels.IngredientViewModel
-import kotlinx.android.synthetic.main.fragment_search_drink.*
 import kotlinx.android.synthetic.main.fragment_search_results.*
+import kotlinx.coroutines.launch
 
 class SearchResultsFragment : Fragment() {
 
@@ -22,15 +23,20 @@ class SearchResultsFragment : Fragment() {
     private lateinit var drinkListAdapter: DrinkListAdapter
     private lateinit var viewManager: RecyclerView.LayoutManager
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
 
         viewModel = ViewModelProvider(this).get(DrinkViewModel::class.java)
         viewManager = LinearLayoutManager(requireContext())
-        drinkListAdapter = DrinkListAdapter(viewModel.listOfDrinks){ it ->
-            viewModel.getDrinksById(it.id){ d ->
+        drinkListAdapter = DrinkListAdapter(viewModel.listOfDrinks) { it ->
+
+            viewModel.getDrinksById(it.id) { d ->
                 DrinkViewModel.selectedDrink = d
-                view?.findNavController()?.navigate(R.id.action_searchResultsFragment_to_drinkDetailsFragment)
+
+                view?.findNavController()
+                    ?.navigate(R.id.action_searchResultsFragment_to_drinkDetailsFragment)
             }
 
         }
@@ -47,9 +53,9 @@ class SearchResultsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        recyclerViewResults.apply{
+        recyclerViewResults.apply {
             adapter = drinkListAdapter
-            layoutManager=viewManager
+            layoutManager = viewManager
         }
 
 

@@ -7,11 +7,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import com.example.cocktailcatalog.R
 import com.example.cocktailcatalog.viewmodels.DrinkViewModel
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_drink_details.*
+import kotlinx.coroutines.launch
 
 class DrinkDetailsFragment : Fragment() {
 
@@ -23,7 +25,9 @@ class DrinkDetailsFragment : Fragment() {
     ): View? {
 
         viewModel = ViewModelProvider(this).get(DrinkViewModel::class.java)
-
+        lifecycleScope.launch {
+            viewModel.addDrinkToHistory(DrinkViewModel.selectedDrink)
+        }
 
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_drink_details, container, false)

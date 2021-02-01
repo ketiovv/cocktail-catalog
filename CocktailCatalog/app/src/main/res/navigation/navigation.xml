@@ -8,7 +8,11 @@
         android:id="@+id/drinkHistoryFragment"
         android:name="com.example.cocktailcatalog.views.DrinkHistoryFragment"
         android:label="drink_history_fragment"
-        tools:layout="@layout/drink_history_fragment" />
+        tools:layout="@layout/drink_history_fragment">
+        <action
+            android:id="@+id/action_drinkHistoryFragment_to_drinkDetailsFragment"
+            app:destination="@id/drinkDetailsFragment" />
+    </fragment>
     <fragment
         android:id="@+id/searchFragment"
         android:name="com.example.cocktailcatalog.views.SearchFragment"

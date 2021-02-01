@@ -8,7 +8,7 @@ import com.example.cocktailcatalog.models.entities.LocalDrink
 
 
 class HistoryRepository(private val historyDao: HistoryDao) {
-    val allDrinks: LiveData<List<History>> = historyDao.getAll()
+    fun getAllHistory(): List<History> = historyDao.getAll()
     suspend fun add(history: History): Long = historyDao.insert(history)
 
 }
