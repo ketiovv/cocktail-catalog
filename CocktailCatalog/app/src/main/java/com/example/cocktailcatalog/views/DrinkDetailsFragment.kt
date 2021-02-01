@@ -39,7 +39,8 @@ class DrinkDetailsFragment : Fragment() {
 
         textViewDrinkNameD.text = DrinkViewModel.selectedDrink.name
         textViewInstructions.text = DrinkViewModel.selectedDrink.instructions
-
+        textViewCategory.text = requireContext().getString(R.string.drink_category) + " " + DrinkViewModel.selectedDrink.category
+        
         Picasso.get().load(DrinkViewModel.selectedDrink.image).resize(700, 700)
                 .centerCrop()
                 .into(imageView)
