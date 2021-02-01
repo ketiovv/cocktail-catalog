@@ -14,4 +14,5 @@ data class LocalDrink(
         var instructions: String,
         var image: String,
         var alcoholic: Boolean,
+        var category: String
 )

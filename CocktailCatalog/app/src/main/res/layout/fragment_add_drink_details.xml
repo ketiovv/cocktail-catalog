@@ -62,6 +62,17 @@
         app:layout_constraintStart_toStartOf="@+id/textView2"
         app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="36dp"
+        android:text="@string/category"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="@+id/textView3"
+        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+
     <Switch
         android:id="@+id/switchAlcoholic"
         android:layout_width="wrap_content"
@@ -75,31 +86,40 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewIngredientsMeasureEntering"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_width="357dp"
+        android:layout_height="308dp"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="20dp"
-        android:layout_marginBottom="16dp"
         android:overScrollMode="ifContentScrolls"
-        app:layout_constraintBottom_toTopOf="@+id/buttonAddDrinkToLocalDatabase"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.285"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+        app:layout_constraintTop_toBottomOf="@+id/spinnerAddDrinkCategory" />
 
     <Button
         android:id="@+id/buttonAddDrinkToLocalDatabase"
         android:layout_width="162dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="36dp"
         android:layout_marginBottom="15dp"
         android:text="@string/add_drink"
         android:textColor="#000000"
         app:cornerRadius="12dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/recyclerViewIngredientsMeasureEntering"
+        app:layout_constraintVertical_bias="1.0" />
 
+    <Spinner
+        android:id="@+id/spinnerAddDrinkCategory"
+        android:layout_width="234dp"
+        android:layout_height="35dp"
+        android:layout_marginTop="36dp"
+        app:layout_constraintStart_toStartOf="@+id/switchAlcoholic"
+        app:layout_constraintTop_toBottomOf="@+id/switchAlcoholic" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
@@ -61,6 +62,10 @@ class AddDrinkDetailsFragment : Fragment() {
         val instructions = editTextNewDrinkInstructions.text
         val imageUrl = editTextImageURL.text
         val alcoholic = switchAlcoholic
+
+        var spinnerAdapter = ArrayAdapter(view.context, android.R.layout.simple_spinner_item, drinkViewModel.categories)
+        spinnerAddDrinkCategory.adapter = spinnerAdapter
+
 
         buttonAddDrinkToLocalDatabase.setOnClickListener {
             if (instructions.isNullOrBlank()){

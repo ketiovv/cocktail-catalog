@@ -26,4 +26,5 @@
     <string name="no">No</string>
     <string name="over_18">false</string>
     <string name="recent_drinks">Recent drinks:</string>
+    <string name="category">Category</string>
 </resources>

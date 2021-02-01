@@ -26,6 +26,20 @@ import java.util.*
 class DrinkViewModel(application: Application) : AndroidViewModel(application) {
     var listOfDrinks = MutableLiveData<DrinkList>()
 
+    var categories = arrayListOf<String>(
+        "Ordinary Drink",
+        "Cocktail",
+        "Milk/Float/Shake",
+        "Cocoa",
+        "Shot",
+        "Coffee / Tea",
+        "Homemade Liqueur",
+        "Punch / Party Drink",
+        "Beer",
+        "Soft Drink",
+        "Other/Unknown"
+    )
+
     var alphabet = arrayListOf<String>(
         "A",
         "B",
@@ -77,7 +91,7 @@ class DrinkViewModel(application: Application) : AndroidViewModel(application) {
         alcoholic: Boolean,
     ): Long = withContext(Dispatchers.IO) {
 
-        val drink = LocalDrink(0, name, instructions, imgUrl, alcoholic)
+        val drink = LocalDrink(0, name, instructions, imgUrl, alcoholic,"test")
         return@withContext drinkRepository.add(drink)
     }
 
@@ -101,8 +115,7 @@ class DrinkViewModel(application: Application) : AndroidViewModel(application) {
                     newName,
                     newInstruction,
                     newImageUrl,
-                    newAlcoholic
-                )
+                    newAlcoholic, "test")
             )
         }
     }
