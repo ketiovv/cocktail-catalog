@@ -70,8 +70,8 @@
             android:text="@string/ingredients"
             android:textColor="#FFFFFF"
             android:textSize="26sp"
-            app:layout_constraintStart_toStartOf="@+id/imageViewF"
-            app:layout_constraintTop_toBottomOf="@+id/imageViewF" />
+            app:layout_constraintStart_toStartOf="@+id/textViewCategoryLocal"
+            app:layout_constraintTop_toBottomOf="@+id/textViewCategoryLocal" />
 
         <TextView
             android:id="@+id/textViewIngredientsListF"
@@ -105,6 +105,18 @@
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/textViewIngredientsListF"
             app:layout_constraintTop_toBottomOf="@+id/textViewIngredientsListF" />
+
+        <TextView
+            android:id="@+id/textViewCategoryLocal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:fontFamily="@font/nunito"
+            android:text="@string/drink_category"
+            android:textColor="#FFFFFF"
+            android:textSize="26sp"
+            app:layout_constraintStart_toStartOf="@+id/imageViewF"
+            app:layout_constraintTop_toBottomOf="@+id/imageViewF" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
